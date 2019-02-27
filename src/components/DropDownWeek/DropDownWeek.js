@@ -2,9 +2,9 @@ import React from 'react'
 import './DropDownWeek.scss'
 
 function DropDownWeek ({ nav }) {
-    const subMenu = nav.map(e => {
+    const subMenu = nav.map((e,i) => {
       return (
-        <li><span>{e.task}</span></li>
+        <li key={i}><span>{e.task}</span></li>
       )
     });
     return (

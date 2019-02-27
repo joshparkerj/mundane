@@ -60,9 +60,9 @@ class MyProfile extends Component {
                           </div>
                           <button className="save_url_btn" onClick={() => this.handleClickUrl(close)}>Save</button>
                           <br />
-                          <div className="header2" onclick={() => this.handleClickRemovePic(close)}> Remove picture
+                          <div className="header2" onClick={() => this.handleClickRemovePic(close)}> Remove picture
                           <br />
-                            <i class="fas fa-trash-alt" ></i>
+                            <i className="fas fa-trash-alt" ></i>
                           </div>
                         </div>
                     )}

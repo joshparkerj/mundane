@@ -32,12 +32,12 @@ class Personal extends Component {
         <h2>Overview</h2>
         <div className='profile_edit_container'>
           <div className='icon_container'>
-            <i class="far fa-user"></i>
+            <i className="far fa-user"></i>
           </div>
           <Popup
             trigger={<div className='data_container_popup_edit_link'>
               <span className='edit_text_title'>Title: {this.props.user.title}</span>
-              <i class="fas fa-pencil-alt"></i>
+              <i className="fas fa-pencil-alt"></i>
             </div>} modal contentStyle={contentStyle}>
             {close => (
               <div className="edit_form">
@@ -57,13 +57,13 @@ class Personal extends Component {
         </div>
         <div className='profile_edit_container'>
           <div className='icon_container'>
-            <i class="fas fa-envelope-square"></i>
+            <i className="fas fa-envelope-square"></i>
           </div>
           <Popup
             trigger={<div className='data_container_popup_edit_link'>
               <span className='edit_text_title'>Email: {this.props.user.email}</span>
               <span className='profile-field-content'></span>
-              <i class="fas fa-pencil-alt"></i>
+              <i className="fas fa-pencil-alt"></i>
             </div>} modal contentStyle={contentStyle}>
             {close => (
               <div className="edit_form">
@@ -83,12 +83,12 @@ class Personal extends Component {
         </div>
         <div className='profile_edit_container'>
           <div className='icon_container'>
-            <i class="fas fa-phone"></i>
+            <i className="fas fa-phone"></i>
           </div>
           <Popup
             trigger={<div className='data_container_popup_edit_link'>
               <span className='edit_text_title'>Phone: {this.props.user.phone}</span>
-              <i class="fas fa-pencil-alt"></i>
+              <i className="fas fa-pencil-alt"></i>
             </div>} modal contentStyle={contentStyle}>
             {close => (
               <div className="edit_form">

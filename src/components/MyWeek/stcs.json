@@ -1,0 +1,27 @@
+[
+  {
+    "hc": "prevWeekHide",
+    "bt": "Previous Weeks /",
+    "nav": "prevWeeksAssignments"
+  },
+  {
+    "hc": "earlierHide",
+    "bt": "Earlier This Week /",
+    "nav": "earlierThisWeek"
+  },
+  {
+    "hc": "todayHide",
+    "bt": "Today /",
+    "nav": "today"
+  },
+  {
+    "hc": "upcomingHide",
+    "bt": "Upcoming /",
+    "nav": "upcoming"
+  },
+  {
+    "hc": "doneHide",
+    "bt": "Done /",
+    "nav": "done"
+  }
+]

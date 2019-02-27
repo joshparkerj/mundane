@@ -1,34 +1,7 @@
 import React, { Component } from 'react'
 import './MyWeek.scss'
 import SectionTypeContainer from './SectionTypeContainer';
-
-const stcs = [
-  {
-    hc: 'prevWeekHide',
-    bt: 'Previous Weeks /',
-    nav: 'prevWeeksAssignments'
-  },
-  {
-    hc: 'earlierHide',
-    bt: 'Earlier This Week /',
-    nav: 'earlierThisWeek'
-  },
-  {
-    hc: 'todayHide',
-    bt: 'Today /',
-    nav: 'today'
-  },
-  {
-    hc: 'upcomingHide',
-    bt: 'Upcoming /',
-    nav: 'upcoming'
-  },
-  {
-    hc: 'doneHide',
-    bt: 'Done /',
-    nav: 'done'
-  }
-];
+import stcs from './stcs.json';
 
 class MyWeek extends Component {
 
@@ -90,14 +63,14 @@ class MyWeek extends Component {
               <div className='prev-week-button'>
                 <span className='prev-week'>Previous week / </span>
                 <span className='prevWeekCounter'> {this.getCount('prevWeek')}
-                  <i class="material-icons" id='chevronLeft'>chevron_left</i>
+                  <i className="material-icons" id='chevronLeft'>chevron_left</i>
                 </span>
               </div>
               <div className='week-indicator-wrapper'>
                 <span className='week-indicator'> {this.getValue('date')}</span>
               </div>
               <div className='next-week-button'>
-                <i class="material-icons" id='chevronRight'>chevron_right</i>
+                <i className="material-icons" id='chevronRight'>chevron_right</i>
                 <span className='next-week'>Next week / </span>
                 <span className='nextWeekCounter'> {this.getCount('nextWeek')}</span>
               </div>
@@ -124,7 +97,7 @@ class MyWeek extends Component {
                     <div className='pure-input'>
                       <input value={this.state.personFilter} name='personFilter' onChange={this.handleChange} className='input person-filter-input' placeholder='Filter by person'></input>
                       <div className='tooltip'>
-                        <i class="material-icons" id='person'>person_outline</i>
+                        <i className="material-icons" id='person'>person_outline</i>
                         <span className='tooltiptext'>Search by person</span>
                       </div>
                     </div>
