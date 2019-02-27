@@ -5,23 +5,18 @@ $purple-main: #a358df;
 $green-main: #00cc6f;
 $sign-in-background: #4f2b6d;
 $nav-font-weight: 700;
-$font-family: "Nunito Sans", sans-serif;
 $gray-section: #f9f9f9;
 $yellow-main: #ffcc00;
 $blue-button: #595ad4;
 $dash-side-nav: #eeeeee;
 $dash-top-nav: #f7f7f7;
 
-
-
 h1 {
-  font-family: $font-family;
   font-weight: 800;
   font-size: 40px;
 }
 
 p {
-  font-family: $font-family;
   font-size: 18px;
   font-weight: 600;
 }
@@ -31,5 +26,3 @@ p {
     font-size: 32px;
   }
 }
-
-

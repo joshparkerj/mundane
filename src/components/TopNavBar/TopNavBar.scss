@@ -287,7 +287,6 @@ SEARCH BAR CSS
     transition: all 1s;
     opacity: 0;
     z-index: 5;
-    font-family: $font-family !important;
     font-size: .85em;
     font-weight: 600;
 
@@ -327,7 +326,6 @@ SEARCH BAR CSS
     }
 
     &::placeholder {
-      font-family: $font-family !important;
       font-weight: 600;
       color: $blue-main;
       font-size: 1.25em;
