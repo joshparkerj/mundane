@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class TeamMember extends Component {
+
   state = {
     buttonDisabled: false,
     approvedTeamMember: false,
@@ -18,9 +19,8 @@ class TeamMember extends Component {
     })
   }
 
-
   render() {
-    const { props: { teamName, teamMember }, state: { buttonDisabled, approvedTeamMember, buttonText } } = this;
+    const { props: { teamMember }, state: { buttonDisabled, approvedTeamMember, buttonText } } = this;
     if (teamMember.approved || approvedTeamMember) {
       return (
         <tr>
@@ -45,6 +45,7 @@ class TeamMember extends Component {
       )
     }
   }
+
 }
 
 export default TeamMember;

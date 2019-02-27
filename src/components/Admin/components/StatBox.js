@@ -3,7 +3,6 @@ import './StatBox.scss'
 
 export default class StatBox extends Component {
 
-
   render() {
     const box = {
       class: this.props.class,
@@ -23,7 +22,6 @@ export default class StatBox extends Component {
             <h2>Last 60 days</h2>
           </div>
           <div className='col-container'>
-
             <div className='box-col'>
               <h1>{box.col1number}</h1>
               <h3>{box.col1title}</h3>
@@ -41,4 +39,5 @@ export default class StatBox extends Component {
       </div>
     )
   }
+
 }

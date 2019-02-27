@@ -66,10 +66,10 @@ class DashSideNav extends Component {
         <div className="leftpane-boards-list-wrapper" id="leftpane-boards-list-wrapper">
           <div>
             <div className="leftpane-boards-public-list-component">
-              <a href="#" className="link-wrapper router" id="link-container" onClick={this.showMenu} >
-                <i class="material-icons title-side">menu</i><span className="title-side">Boards public</span>
+              <span className="link-wrapper router" id="link-container" onClick={this.showMenu} >
+                <i className="material-icons title-side">menu</i><span className="title-side">Boards public</span>
                 <span className="title-side"> ({this.boardCount()})</span>
-              </a>
+              </span>
               <div className='drop-menu'>
                 {
                   this.state.hidden
@@ -86,10 +86,10 @@ class DashSideNav extends Component {
         <div className="leftpane-boards-list-wrapper" id="leftpane-boards-list-wrapper">
           <div>
             <div className="leftpane-boards-private-list-component" id="leftpane-boards-list-component">
-              <a href="#" className="link-wrapper router" id="link-container" onClick={this.showPrivate} >
-                <i class="material-icons title-side">menu</i><span className="title-side">Boards private</span>
+              <span className="link-wrapper router" id="link-container" onClick={this.showPrivate} >
+                <i className="material-icons title-side">menu</i><span className="title-side">Boards private</span>
                 <span className="title-side"> ({this.boardCount(true)})</span>
-              </a>
+              </span>
               {
                 this.state.showPrivate
                   ? (

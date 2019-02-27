@@ -3,16 +3,8 @@ import './dash-column-picker.scss';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import axios from 'axios';
-import $ from 'jquery';
-
 
 class DashColumnPicker extends Component {
-
-  // componentDidMount = () => {
-  //   $(window).click(function(){
-  //     $('.time-est-input').blur()
-  //   })
-  // }
 
   handleDayClick = (day, { selected }) => {
     this.setState({
@@ -21,12 +13,8 @@ class DashColumnPicker extends Component {
   }
 
   onEnterTime = ({ key, target, target: {value}}, ) => {
-    console.log(this.props.item)
     if(key === 'Enter') {
       axios.put('/api/task/time_est', {taskID: this.props.cellID, time_est: value })
-        .then(response => {
-          console.log(response.data)
-        })
     }
   }
 
@@ -101,8 +89,8 @@ class DashColumnPicker extends Component {
       case 'time_est':
         return (
           <div className="time-est-wrapper">
-            <input 
-              className={`time-est-input`} 
+            <input
+              className={`time-est-input`}
               onKeyDown={this.onEnterTime}
               type="number"
               min="0"
@@ -124,14 +112,12 @@ class DashColumnPicker extends Component {
     return (
       <div>
         {modalType === 'status' || modalType === 'priority' || modalType === 'end_date' ? (
-
           <div
             id={this.props.id}
             className={`column-modal-container ${selected ? "" : "hidden"}`}
           >
             {this.modalTypes(modalType)}
           </div>
-
         ) : null}
         {modalType === 'time_est' ? (
           <div

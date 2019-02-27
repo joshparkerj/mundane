@@ -3,17 +3,15 @@ import DashColumnPicker from '../DashColumnPicker/DashColumnPicker';
 import axios from 'axios';
 
 class BoardCell extends Component {
+
   state = {
     values: null
   }
 
   onDropdownChange = (col_name, id, class_name, values) => {
-    console.log(col_name, id);
-    this.setState({
-      values: values
-    })
+    this.setState({values: values});
     document.activeElement.blur();
-    axios.put(`/api/task/${col_name}`, { taskID: id, [col_name]: values })
+    axios.put(`/api/task/${col_name}`, { taskID: id, [col_name]: values });
   }
 
   handleDayClick = (day, { selected }) => {
@@ -23,6 +21,7 @@ class BoardCell extends Component {
     document.activeElement.blur();
     axios.put(`/api/task/end_date`, { taskID: this.props.item.id, end_date: day.toLocaleDateString() })
   }
+
   returnClassName(values, col_name) {
     switch (col_name) {
       case 'status':
@@ -49,14 +48,13 @@ class BoardCell extends Component {
         }
       case 'time_est':
         return 'time-est-input'
-
       default:
         return '';
     }
   }
+
   render() {
     const { props: { item, col_name, ti, uc, s }, state: { values } } = this;
-
     return (
       <td
         className={`board-cell ${this.returnClassName(values || item[col_name], col_name)} ${col_name === 'name' ? 'left-align' : ''}`}
@@ -77,6 +75,7 @@ class BoardCell extends Component {
       </td>
     )
   }
+
 }
 
 export default BoardCell;

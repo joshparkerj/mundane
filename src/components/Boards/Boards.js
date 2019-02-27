@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
-import './boards.scss';
 import CommentSlideIn from '../CommentSlideIn/CommentSlideIn';
 import BoardRow from './BoardRow';
+import './boards.scss';
 
 class Boards extends Component {
 
@@ -61,7 +60,7 @@ class Boards extends Component {
         open: true,
         commentList: [],
     })
-    
+
   }
 
   handleSlideInClose = () => {
@@ -88,7 +87,7 @@ class Boards extends Component {
 
           this.setState({
             items: this.state.items.concat(task.data)});
-          
+
       })
     }
   }
@@ -152,6 +151,7 @@ class Boards extends Component {
         />
       </div>);
     }
+
 }
 
 export default Boards;

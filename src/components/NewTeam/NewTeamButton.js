@@ -9,24 +9,16 @@ class NewTeamButton extends Component {
   }
 
   handleChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    axios.post('/api/team', {
-      name: this.state.teamName
-    })
-    .then(() => {
-      this.setState({
-        teamName: ''
-      })
-    })
-    this.setState({
-      teamName: 'Thank you!'
-    })
+    axios.post('/api/team', { name: this.state.teamName })
+      .then(() => {
+        this.setState({ teamName: '' });
+      });
+    this.setState({ teamName: 'Thank you!' });
   }
 
   render() {

@@ -1,8 +1,36 @@
 import React, { Component } from 'react'
-import DropDownWeek from '../DropDownWeek/DropDownWeek'
 import './MyWeek.scss'
+import SectionTypeContainer from './SectionTypeContainer';
 
-export default class MyWeek extends Component {
+const stcs = [
+  {
+    hc: 'prevWeekHide',
+    bt: 'Previous Weeks /',
+    nav: 'prevWeeksAssignments'
+  },
+  {
+    hc: 'earlierHide',
+    bt: 'Earlier This Week /',
+    nav: 'earlierThisWeek'
+  },
+  {
+    hc: 'todayHide',
+    bt: 'Today /',
+    nav: 'today'
+  },
+  {
+    hc: 'upcomingHide',
+    bt: 'Upcoming /',
+    nav: 'upcoming'
+  },
+  {
+    hc: 'doneHide',
+    bt: 'Done /',
+    nav: 'done'
+  }
+];
+
+class MyWeek extends Component {
 
   state = {
     prevWeek: [1,],
@@ -24,56 +52,34 @@ export default class MyWeek extends Component {
     assignmentCount: [1, 2,]
   }
 
-  prevWeekCount = () => {
-    return this.state.prevWeek.length
+  getCount = name => {
+    return this.state[name].length;
   }
 
-  nextWeekCount = () => {
-    return this.state.nextWeek.length
+  getValue = name => {
+    return this.state[name];
   }
 
-  weekIndicator = () => {
-    return this.state.date
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
   }
 
-  greeting = () => {
-    return this.state.username
+  toggleState = name => {
+    this.setState({ [name]: !this.state[name] });
   }
 
-  upcoming = () => {
-    return this.state.upcomingAssignments
+  stcMapper = (e, i) => {
+    return (
+      <SectionTypeContainer
+        hc={() => this.toggleState(e.hc)}
+        bt={e.bt}
+        ac={this.getCount('assignmentCount')}
+        sdd={this.state[e.hc]}
+        nav={this.state[e.nav]}
+        key={i}
+      />
+    );
   }
-
-  handleChange = (e) => {
-    const key = e.target.name;
-    const value = e.target.value;
-    this.setState({ [key]: value })
-  }
-
-  assignmentCounter = () => {
-    return this.state.assignmentCount.length
-  }
-
-  prevWeekDrop = () => {
-    this.setState({ prevWeekHide: !this.state.prevWeekHide })
-  }
-
-  earlierDrop = () => {
-    this.setState({ earlierHide: !this.state.earlierHide })
-  }
-
-  todayDrop = () => {
-    this.setState({ todayHide: !this.state.todayHide })
-  }
-
-  upcomingDrop = () => {
-    this.setState({ upcomingHide: !this.state.upcomingHide })
-  }
-
-  doneDrop = () => {
-    this.setState({ doneHide: !this.state.doneHide })
-  }
-
 
   render() {
     return (
@@ -83,17 +89,17 @@ export default class MyWeek extends Component {
             <div className='personal-assistant-weeks-navigator-component'>
               <div className='prev-week-button'>
                 <span className='prev-week'>Previous week / </span>
-                <span className='prevWeekCounter'> {this.prevWeekCount()}
+                <span className='prevWeekCounter'> {this.getCount('prevWeek')}
                   <i class="material-icons" id='chevronLeft'>chevron_left</i>
                 </span>
               </div>
               <div className='week-indicator-wrapper'>
-                <span className='week-indicator'> {this.weekIndicator()}</span>
+                <span className='week-indicator'> {this.getValue('date')}</span>
               </div>
               <div className='next-week-button'>
                 <i class="material-icons" id='chevronRight'>chevron_right</i>
                 <span className='next-week'>Next week / </span>
-                <span className='nextWeekCounter'> {this.nextWeekCount()}</span>
+                <span className='nextWeekCounter'> {this.getCount('nextWeek')}</span>
               </div>
             </div>
           </div>
@@ -102,13 +108,13 @@ export default class MyWeek extends Component {
           <div className='personal-assistant-content-component'>
             <div className='header-container'>
               <div className='personal-assistant-header-component'>
-                <img src="https://cdn.monday.com/assets/deadline/coffee_team.png" className='image-title' />
+                <img src="https://cdn.monday.com/assets/deadline/coffee_team.png" className='image-title' alt="" />
                 <div className='pesonal-assistant-titles'>
                   <div className='first-title'>
-                    <span className='greeting'>{this.greeting()}</span>
+                    <span className='greeting'>{this.getValue('username')}</span>
                   </div>
                   <div className='second-title'>
-                    <span className='upcoming-assignments'>{this.upcoming()}</span>
+                    <span className='upcoming-assignments'>{this.getValue('upcomingAssignments')}</span>
                   </div>
                 </div>
               </div>
@@ -128,61 +134,7 @@ export default class MyWeek extends Component {
             </div>
             <div className='deadlines-task-container'>
               <div className='deadline-tasks-section-component'>
-                <div className='section-type-container'>
-                  <a href='#' onClick={this.prevWeekDrop}>Previous Weeks /</a>
-                  <span className='assignmentCounter'>{this.assignmentCounter()}</span>
-                  {
-                    this.state.prevWeekHide
-                      ? (
-                        <DropDownWeek nav={this.state.prevWeeksAssignments} />
-                      )
-                      : (null)
-                  }
-                </div>
-                <div className='section-type-container'>
-                  <a href='#' onClick={this.earlierDrop}>Earlier This Week /</a>
-                  <span className='assignmentCounter'>{this.assignmentCounter()}</span>
-                  {
-                    this.state.earlierHide
-                      ? (
-                        <DropDownWeek nav={this.state.earlierThisWeek} />
-                      )
-                      : (null)
-                  }
-                </div>
-                <div className='section-type-container'>
-                  <a href='#' onClick={this.todayDrop}>Today /</a>
-                  <span className='assignmentCounter'>{this.assignmentCounter()}</span>
-                  {
-                    this.state.todayHide
-                      ? (
-                        <DropDownWeek nav={this.state.today} />
-                      )
-                      : (null)
-                  }
-                </div>
-                <div className='section-type-container'>
-                  <a href='#' onClick={this.upcomingDrop}>Upcoming /</a>
-                  <span className='assignmentCounter'>{this.assignmentCounter()}</span>
-                  {
-                    this.state.upcomingHide
-                      ? (
-                        <DropDownWeek nav={this.state.upcoming} />
-                      )
-                      : (null)
-                  }
-                </div>
-                <div className='section-type-container'>
-                  <a href='#' onClick={this.doneDrop}>Done /</a>
-                  <span className='assignmentCounter'>{this.assignmentCounter()}</span>
-                  {
-                    this.state.doneHide
-                      ? (
-                        <DropDownWeek nav={this.state.done} />
-                      )
-                      : (null)
-                  }
-                </div>
+                {stcs.map(this.stcMapper)}
               </div>
             </div>
           </div>
@@ -190,4 +142,7 @@ export default class MyWeek extends Component {
       </div>
     )
   }
+
 }
+
+export default MyWeek;

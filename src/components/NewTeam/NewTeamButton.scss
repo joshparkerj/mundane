@@ -14,17 +14,18 @@
     padding: 10px;
     color: $red-main;
     font-size: 1em;
-    text-align:center;
+    text-align: center;
 
     &::placeholder {
       color: $red-main;
-      text-align:center;
+      text-align: center;
     }
   }
 }
+
 .new-team-button label {
   margin-bottom: 7%;
   font-size: 2em;
-  font-weight:700;
-  color:$red-main;
+  font-weight: 700;
+  color: $red-main;
 }

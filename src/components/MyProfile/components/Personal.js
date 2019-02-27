@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import './Personal.scss'
 import Popup from "reactjs-popup";
-import axios from "axios";
 import { connect } from "react-redux"
 import { setPhone, setTitle, setEmail } from "../../../redux/actions"
-
 
 const contentStyle = {
   maxWidth: "600px",
@@ -12,32 +10,20 @@ const contentStyle = {
 };
 
 class Personal extends Component {
+
   state = {
     email: '',
     phone: '',
     title: '',
   }
 
-  handleChange = (e) => {
-    const key = e.target.name;
-    const value = e.target.value;
-    this.setState({ [key]: value })
+  handleChange = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
   }
 
-  handleClickSaveTitle = (close) => {
-    this.props.setTitle({ title: this.state.title })
-    close()
-
-  }
-
-  handleClickSaveEmail = (close) => {
-    this.props.setEmail({ email: this.state.email })
-    close()
-  }
-
-  handleClickSavePhone = (close) => {
-    this.props.setPhone({ phone: this.state.phone })
-    close()
+  handleClick = (close, propsMethod, name) => {
+    this.props[propsMethod]({ [name]: this.state[name] });
+    close();
   }
 
   render() {
@@ -51,7 +37,6 @@ class Personal extends Component {
           <Popup
             trigger={<div className='data_container_popup_edit_link'>
               <span className='edit_text_title'>Title: {this.props.user.title}</span>
-
               <i class="fas fa-pencil-alt"></i>
             </div>} modal contentStyle={contentStyle}>
             {close => (
@@ -64,7 +49,7 @@ class Personal extends Component {
                 </div>
                 <br />
                 <div className='save-title-btn'>
-                  <button className="save" onClick={() => this.handleClickSaveTitle(close)}>Save</button>
+                  <button className="save" onClick={() => this.handleClick(close, 'setTitle', 'title')}>Save</button>
                 </div>
               </div>
             )}
@@ -90,7 +75,7 @@ class Personal extends Component {
                 </div>
                 <br />
                 <div className='save-title-btn'>
-                  <button className="save" onClick={() => this.handleClickSaveEmail(close)}>Save</button>
+                  <button className="save" onClick={() => this.handleClick(close, 'setEmail', 'email')}>Save</button>
                 </div>
               </div>
             )}
@@ -115,7 +100,7 @@ class Personal extends Component {
                 </div>
                 <br />
                 <div className='save-title-btn'>
-                  <button className="save" onClick={() => this.handleClickSavePhone(close)}>Save</button>
+                  <button className="save" onClick={() => this.handleClick(close, 'setPhone', 'phone')}>Save</button>
                 </div>
               </div>
             )}
@@ -126,4 +111,5 @@ class Personal extends Component {
   }
 
 }
+
 export default connect(null, { setPhone, setEmail, setTitle })(Personal)

@@ -1,7 +1,9 @@
 @import '../../views/marketing/variables.scss';
 
-div, span, a {
-  font-family: $font-family!important;
+div,
+span,
+a {
+  font-family: $font-family !important;
 }
 
 .leftpane-container {
@@ -11,16 +13,16 @@ div, span, a {
   position: fixed;
   top: 0;
   left: 0;
-  z-index:10;
+  z-index: 10;
 }
 
-.leftpane-logo{
+.leftpane-logo {
   height: 20px;
   width: 50px;
 }
 
-.title-side{
-  color:#333333;
+.title-side {
+  color: #333333;
   margin: 10px;
 }
 
@@ -29,53 +31,59 @@ div, span, a {
 }
 
 .leftpane-inbox-component {
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: left;
   padding-left: 25px;
   height: 60px;
-  a{
+
+  a {
     text-decoration: none;
     display: flex;
     justify-content: center;
     align-content: center;
   }
-  &:hover{
+
+  &:hover {
     background-color: #009aff;
-    color:white;
+    color: white;
     cursor: pointer;
-    .title-side{
-      color:white !important; 
+
+    .title-side {
+      color: white !important;
     }
-    .inboxCounter{
+
+    .inboxCounter {
       background: white;
-      color:#333333;
+      color: #333333;
     }
   }
 }
 
-.inbox-wrap{
+.inbox-wrap {
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-right: 10px;
+
   div {
     font-size: 20px;
   }
 
 }
+
 .inboxCounter {
   height: 25px;
   display: flex;
   align-items: center;
-  color:white;
+  color: white;
   padding: 3px 15px;
   border-radius: 15px;
   background-color: #009aff;
-  font-size: 14px!important;
+  font-size: 14px !important;
 }
 
 .leftpane-week-component {
@@ -84,24 +92,27 @@ div, span, a {
   text-align: left;
   padding-left: 25px;
   height: 55px;
-  // border-bottom:solid 1px #999999;
-  &:hover{
+
+  &:hover {
     background-color: #009aff;
-    color:white;
+    color: white;
     cursor: pointer;
-    .title-side{
-      color:white !important; 
+
+    .title-side {
+      color: white !important;
     }
   }
-  a{
+
+  a {
     text-decoration: none;
   }
+
   span {
-    font-size: 20px!important;
+    font-size: 20px !important;
   }
 }
 
-.leftpane-boards-public-list-component, 
+.leftpane-boards-public-list-component,
 .leftpane-boards-private-list-component {
   display: flex;
   justify-content: flex-start;
@@ -109,21 +120,23 @@ div, span, a {
   flex-direction: column;
   min-height: 40px;
   margin: 5px auto;
-  // border-bottom:solid 1px #999999;
-  &:hover{
+
+  &:hover {
     cursor: pointer;
-    .title-side{
-    }
+
+    .title-side {}
   }
-  a{
-    display:flex;
+
+  a {
+    display: flex;
     justify-content: flex-start;
     align-content: center;
     text-decoration: none;
   }
 }
+
 .drop-menu {
-  display:flex;
+  display: flex;
   flex-flow: column;
   padding-bottom: 10px;
 }
@@ -138,5 +151,5 @@ div, span, a {
   .leftpane-container {
     width: 210px;
   }
-  
+
 }

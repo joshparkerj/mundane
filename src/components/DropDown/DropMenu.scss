@@ -2,18 +2,19 @@
   margin: 0;
   padding: 0;
 }
+
 .drop-nav-wrapper {
   display: flex;
-  justify-content: flex-start;;
+  justify-content: flex-start;
+  ;
 }
 
 .drop-down-nav {
-  
+
   list-style: none;
   position: relative;
   text-decoration: none;
   padding-bottom: 2px;
-  // border: solid 1px white;
   width: 100%;
   height: 40px;
   text-align: left;
@@ -25,8 +26,8 @@
     height: 25px;
     padding: 10px;
     padding-left: 40px;
-    color:black;
-    
+    color: black;
+
   }
 }
 
@@ -35,18 +36,19 @@
   justify-content: flex-start;
   flex-flow: column;
   width: 100%;
-  background-color:#eeeeee;
-  margin:0;
+  background-color: #eeeeee;
+  margin: 0;
   list-style: none;
-  color:black;
+  color: black;
 }
 
 
-.submenu a:hover{
+.submenu a:hover {
   background-color: #333333;
   color: white;
-  
+
 }
+
 .board-name {
-  color:#333333;
+  color: #333333;
 }

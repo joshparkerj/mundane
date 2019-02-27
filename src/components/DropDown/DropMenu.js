@@ -10,35 +10,31 @@ class DropMenu extends Component {
 
   handleClick = () => {
     this.setState({ hidden: !this.state.hidden})
-  
   }
-
-
 
   render() {
     const subMenu = this.state.nav.map(i => {
-      
-    
       return (
-        <li><a href='#'>{i.board}</a></li>
+        <li><span>{i.board}</span></li>
       )
     })
     return (
       <div className = 'drop-nav-wrapper'>
         <ul>
-          <li><a href='#' onClick = {this.handleClick}> Testing</a>
+          <li><span onClick = {this.handleClick}> Testing</span>
           {this.state.hidden?(
             <ul  className = 'submenu'>
               {subMenu}
             </ul>
-
           ):(null)
           }
           </li>
-          <li><a href='#'>test </a></li>
+          <li><span>test </span></li>
         </ul>
       </div>
     )
   }
+
 }
+
 export default DropMenu;

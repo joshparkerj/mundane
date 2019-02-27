@@ -1,11 +1,9 @@
 .my-week-main-container{
   width:100%;
-  
 }
 
 .personal-assistant-content-header{
   display: flex;
-  // margin-left: 30%;
   align-items: center;
   height: 80px;
   width: 100%;
@@ -14,7 +12,6 @@
 
 .personal-assistant-weeks-navigator-component{
   display: flex;
-  // justify-content: flex-start;
   align-items: center;
   height: 37px;
   width: 100%;
@@ -25,7 +22,7 @@
   &:hover{
     color:#009aff;
     cursor: pointer;
-}
+  }
 }
 
 .personal-assistant-content-component{
@@ -72,7 +69,7 @@
   height: 22px;
   width: 230px;
   border-radius: 15px;
-  border:solid black 1px;              
+  border:solid black 1px;
 }
 
 .tooltip {

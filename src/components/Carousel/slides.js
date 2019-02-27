@@ -100,4 +100,5 @@ const slides = [
         quoteImage: sarah,
     },
 ];
+
 export default slides;
