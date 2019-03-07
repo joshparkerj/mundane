@@ -313,7 +313,7 @@
 									"});",
 									"",
 									"pm.test(\"Response includes correct user information\", function () {",
-									"    pm.expect(pm.response.json().user.username).to.equal(pm.environment.get('username'));",
+									"    pm.expect(pm.response.json().user.name).to.equal(pm.environment.get('username'));",
 									"});",
 									""
 								],
@@ -556,7 +556,7 @@
 									"});",
 									"",
 									"pm.test(\"Response includes correct user information\", function () {",
-									"    pm.expect(pm.response.json().user.username).to.equal(pm.environment.get('username'));",
+									"    pm.expect(pm.response.json().user.name).to.equal(pm.environment.get('username'));",
 									"});",
 									""
 								],
