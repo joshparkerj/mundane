@@ -2908,13 +2908,20 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"teamID\": {{new_team_id}}\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/team/quit/:id",
+							"raw": "localhost:8080/api/team/quit",
 							"host": [
 								"localhost"
 							],
@@ -2922,14 +2929,7 @@
 							"path": [
 								"api",
 								"team",
-								"quit",
-								":id"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "{{new_team_id}}"
-								}
+								"quit"
 							]
 						}
 					},
@@ -3167,9 +3167,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -3182,10 +3179,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"theirID\": 20\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/team/us",
+							"raw": "localhost:8080/api/team/us/:theirID",
 							"host": [
 								"localhost"
 							],
@@ -3193,7 +3190,14 @@
 							"path": [
 								"api",
 								"team",
-								"us"
+								"us",
+								":theirID"
+							],
+							"variable": [
+								{
+									"key": "theirID",
+									"value": "20"
+								}
 							]
 						}
 					},
@@ -3225,9 +3229,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -3240,10 +3241,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"organization\": \"the great candy factory in the sky\"\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/team/organization",
+							"raw": "localhost:8080/api/team/organization/:organization",
 							"host": [
 								"localhost"
 							],
@@ -3251,7 +3252,14 @@
 							"path": [
 								"api",
 								"team",
-								"organization"
+								"organization",
+								":organization"
+							],
+							"variable": [
+								{
+									"key": "organization",
+									"value": "the great candy factory in the sky"
+								}
 							]
 						}
 					},
@@ -3293,9 +3301,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -3308,10 +3313,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"{{firstLetter}}\"\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/team/by-name",
+							"raw": "localhost:8080/api/team/by-name/:name",
 							"host": [
 								"localhost"
 							],
@@ -3319,7 +3324,14 @@
 							"path": [
 								"api",
 								"team",
-								"by-name"
+								"by-name",
+								":name"
+							],
+							"variable": [
+								{
+									"key": "name",
+									"value": "{{firstLetter}}"
+								}
 							]
 						}
 					},
@@ -3473,17 +3485,24 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"teamID\": \"{{new_team_id}}\"\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/team",
+							"raw": "localhost:8080/api/team/:teamID",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"team"
+								"team",
+								":teamID"
+							],
+							"variable": [
+								{
+									"key": "teamID",
+									"value": "{{new_team_id}}"
+								}
 							]
 						}
 					},
