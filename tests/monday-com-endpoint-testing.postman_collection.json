@@ -2071,7 +2071,7 @@
 									"});",
 									"",
 									"pm.test(\"Response includes the message that was sent by skittles\", function () {",
-									"    pm.expect(pm.response.json().filter(e => e.sender === 'skittles')[0].content).to.equal('hey wat u doing lol');",
+									"    pm.expect(pm.response.json().filter(e => e.author === 'skittles')[0].content).to.equal('hey wat u doing lol');",
 									"});",
 									""
 								],
@@ -2138,13 +2138,20 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"messageID\":{{msgid}}\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/message/read/:msgid",
+							"raw": "localhost:8080/api/message/read",
 							"host": [
 								"localhost"
 							],
@@ -2152,14 +2159,7 @@
 							"path": [
 								"api",
 								"message",
-								"read",
-								":msgid"
-							],
-							"variable": [
-								{
-									"key": "msgid",
-									"value": "{{msgid}}"
-								}
+								"read"
 							]
 						}
 					},
@@ -2335,25 +2335,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"newContent\": \"I think you are the best ever\"\n}"
+							"raw": "{\n\t\"messageID\": {{msgid}},\n\t\"content\": \"I think you are the best ever\"\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/message/id/:msgid",
+							"raw": "localhost:8080/api/message",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"message",
-								"id",
-								":msgid"
-							],
-							"variable": [
-								{
-									"key": "msgid",
-									"value": "{{msgid}}"
-								}
+								"message"
 							]
 						}
 					},
