@@ -6,9 +6,11 @@ const serverError = require('./helpers/server-error');
 const onMessage = require('./helpers/on-message');
 const messageRecipient = require('./helpers/message-recipient');
 const messageSender = require('./helpers/message-sender');
+
 const rdbm = req => req.db.message;
 const rjsr = res => r => res.json(r);
 const rsm = (res, message) => () => res.send(message);
+const ruser = req => req.user[0].id
 
 router.use((req, res, next) => {
   req.db = req.app.get('db');
@@ -20,13 +22,13 @@ router.use((req, res, next) => {
 // only works when logged in
 router.post('/', isAuthenticated, (req, res, next) => {
   rdbm(req).post_message([
-    req.user[0].id,
+    ruser(req),
     req.body.recipientID,
     req.body.content
   ])
     .then(() => {
       return rdbm(req).get_message_by_sender_receiver_most_recent([
-        req.user[0].id,
+        ruser(req),
         req.body.recipientID
       ])
     })
@@ -37,7 +39,7 @@ router.post('/', isAuthenticated, (req, res, next) => {
 // GET /api/message
 // gets all messages addressed to user (whoever is logged in on the cookie)
 router.get('/', isAuthenticated, (req, res, next) => {
-  rdbm(req).get_messages_by_recipient([req.user[0].id])
+  rdbm(req).get_messages_by_recipient([ruser(req)])
     .then(rjsr(res))
     .catch(serverError(res));
 })
@@ -45,7 +47,7 @@ router.get('/', isAuthenticated, (req, res, next) => {
 // GET /api/message/sent
 // gets all messages the user has sent
 router.get('/sent', isAuthenticated, (req, res, next) => {
-  rdbm(req).get_messages_by_sender([req.user[0].id])
+  rdbm(req).get_messages_by_sender([ruser(req)])
     .then(rjsr(res))
     .catch(serverError(res));
 })
