@@ -18,7 +18,7 @@ router.use((req, res, next) => {
 router.get('/from-team:teamID', onTeam, (req, res, next) => {
   req.db.user.get_users_by_team([req.params.teamID])
     .then(users => res.status(200).send(users))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/user/search
@@ -26,7 +26,7 @@ router.get('/from-team:teamID', onTeam, (req, res, next) => {
 router.get('/search/:name', isAuthenticated, (req, res, next) => {
   req.db.user.get_user_by_partial_name([req.params.name + '%'])
     .then(user => res.status(200).json(user))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // POST /api/user/follow
@@ -34,7 +34,7 @@ router.get('/search/:name', isAuthenticated, (req, res, next) => {
 router.post('/follow', isAuthenticated, (req, res, next) => {
   req.db.user.follow_user([req.user[0].id, req.body.userID])
     .then(() => res.status(200).send('followed'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/user/unfollow
@@ -42,7 +42,7 @@ router.post('/follow', isAuthenticated, (req, res, next) => {
 router.put('/unfollow', isAuthenticated, (req, res, next) => {
   req.db.user.unfollow_user([req.user[0].id, req.body.userID])
     .then(() => res.status(200).send('unfollowed'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET api/user/follow
@@ -50,7 +50,7 @@ router.put('/unfollow', isAuthenticated, (req, res, next) => {
 router.get('/follow', isAuthenticated, (req, res, next) => {
   req.db.user.get_users_i_am_following([req.user[0].id])
     .then(users => res.status(200).json(users))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET api/user/details/:userID
@@ -59,7 +59,7 @@ router.get('/follow', isAuthenticated, (req, res, next) => {
 router.get('/details/:userID', isAuthenticated, teamMates, (req, res, next) => {
   req.db.user.get_details([req.params.userID])
     .then(user => res.status(200).json(user))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET api/user/my-details
@@ -67,7 +67,7 @@ router.get('/details/:userID', isAuthenticated, teamMates, (req, res, next) => {
 router.get('/my-details', isAuthenticated, (req, res, next) => {
   req.db.user.get_details([req.user[0].id])
     .then(user => res.status(200).json(user))
-    .catch(err => serverError(err, res))
+    .catch(serverError(res))
 })
 
 // PUT api/user/phone
@@ -75,7 +75,7 @@ router.get('/my-details', isAuthenticated, (req, res, next) => {
 router.put('/phone', isAuthenticated, (req, res, next) => {
   req.db.user.set_phone([req.body.phone, req.user[0].id])
     .then(() => res.status(200).send('phone set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT api/user/location
@@ -83,7 +83,7 @@ router.put('/phone', isAuthenticated, (req, res, next) => {
 router.put('/location', isAuthenticated, (req, res, next) => {
   req.db.user.set_location([req.body.location, req.user[0].id])
     .then(() => res.status(200).send('location set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT api/user/skype
@@ -91,16 +91,15 @@ router.put('/location', isAuthenticated, (req, res, next) => {
 router.put('/skype', isAuthenticated, (req, res, next) => {
   req.db.user.set_skype([req.body.skype, req.user[0].id])
     .then(() => res.status(200).send('skype set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT api/user/title
 // set your title
 router.put('/title', isAuthenticated, (req, res, next) => {
-  console.log("title" , req.body)
   req.db.user.set_title([req.body.title, req.user[0].id])
     .then(() => res.status(200).send('title set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT api/user/pic
@@ -108,7 +107,7 @@ router.put('/title', isAuthenticated, (req, res, next) => {
 router.put('/pic', isAuthenticated, (req, res, next) => {
   req.db.user.set_pic([req.body.pic, req.user[0].id])
     .then(() => res.status(200).send('pic set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT api/user/email
@@ -116,7 +115,7 @@ router.put('/pic', isAuthenticated, (req, res, next) => {
 router.put('/email', isAuthenticated, (req,res,next) => {
   req.db.user.set_email([req.body.email, req.user[0].id])
     .then(() => res.status(200).send('email set'))
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 
 module.exports = router;

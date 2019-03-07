@@ -15,5 +15,5 @@
            res.status(403).send('not your assignment');
          }
        })
-       .catch(err => serverError(err,res));
+       .catch(serverError(res));
    }

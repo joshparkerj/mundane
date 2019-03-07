@@ -20,7 +20,7 @@ router.post('/', isAuthenticated, onTeam, (req, res, next) => {
   req.db.board.new([req.body.name, req.body.teamID, req.user[0].id])
     .then(() => req.db.board.get_id_by_name([req.body.name]))
     .then(boards => res.status(200).json(boards[0]))
-    .catch(err => serverError(err, res))
+    .catch(serverError(res))
 })
 
 // GET /api/board
@@ -28,7 +28,7 @@ router.post('/', isAuthenticated, onTeam, (req, res, next) => {
 router.get('/', isAuthenticated, (req, res, next) => {
   req.db.board.mine([req.user[0].id])
     .then(boards => res.status(200).json(boards))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/board/modifiable
@@ -36,7 +36,7 @@ router.get('/', isAuthenticated, (req, res, next) => {
 router.get('/modifiable', isAuthenticated, (req, res, next) => {
   req.db.board.modifiable([req.user[0].id])
     .then(boards => res.status(200).json(boards))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/board/id/:name
@@ -53,7 +53,7 @@ router.get('/id/:name', isAuthenticated, (req, res, next) => {
       }
       sendBoardID(id[0].id, req.params.name, req, res, next)
     })
-    .catch(err => serverError(err, res))
+    .catch(serverError(res))
 })
 
 // GET /api/board/team/:teamID
@@ -62,7 +62,7 @@ router.get('/id/:name', isAuthenticated, (req, res, next) => {
 router.get('/team/:teamID', isAuthenticated, onTeam, (req, res, next) => {
   req.db.board.on_team([req.params.teamID])
     .then(boards => res.status(200).json(boards))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/board/name/:searchTerm
@@ -70,7 +70,7 @@ router.get('/team/:teamID', isAuthenticated, onTeam, (req, res, next) => {
 router.get('/name/:searchTerm', isAuthenticated, (req, res, next) => {
   req.db.board.name_search([req.params.searchTerm + '%', req.user[0].id])
     .then(boards => res.status(200).json(boards))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/board/by-id/:boardID
@@ -78,7 +78,7 @@ router.get('/name/:searchTerm', isAuthenticated, (req, res, next) => {
 router.get('/by-id/:boardID', isAuthenticated, onBoard, (req, res, next) => {
   req.db.board.by_id([req.params.boardID])
     .then(board => res.status(200).json(board))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // DELETE /api/board/:boardID
@@ -86,7 +86,7 @@ router.get('/by-id/:boardID', isAuthenticated, onBoard, (req, res, next) => {
 router.delete('/:boardID', isAuthenticated, boardLord, (req, res, next) => {
   req.db.board.delete([req.params.boardID])
     .then(() => res.status(200).send('deleted'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/board/name
@@ -95,7 +95,7 @@ router.delete('/:boardID', isAuthenticated, boardLord, (req, res, next) => {
 router.put('/name', isAuthenticated, boardLord, (req, res, next) => {
   req.db.board.rename([req.body.name, req.body.boardID])
     .then(() => res.status(200).send('renamed'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/board/description
@@ -104,7 +104,7 @@ router.put('/name', isAuthenticated, boardLord, (req, res, next) => {
 router.put('/description', isAuthenticated, boardLord, (req, res, next) => {
   req.db.board.description([req.body.description, req.body.boardID])
     .then(() => res.status(200).send('description updated'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/board/owner
@@ -113,7 +113,7 @@ router.put('/description', isAuthenticated, boardLord, (req, res, next) => {
 router.put('/owner', isAuthenticated, boardLord, (req, res, next) => {
   req.db.board.owner([req.body.ownerID, req.body.boardID])
     .then(() => res.status(200).send('ownership transferred'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 module.exports = router;

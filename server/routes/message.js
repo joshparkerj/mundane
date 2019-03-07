@@ -28,7 +28,7 @@ router.post('/', isAuthenticated, (req, res, next) => {
       ])
     })
     .then(msgs => res.status(200).send(`${msgs[0].id}`))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/message
@@ -36,7 +36,7 @@ router.post('/', isAuthenticated, (req, res, next) => {
 router.get('/', isAuthenticated, (req, res, next) => {
   req.db.message.get_messages_by_recipient([req.user[0].id])
     .then(messages => res.status(200).json(messages))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/message/sent
@@ -44,7 +44,7 @@ router.get('/', isAuthenticated, (req, res, next) => {
 router.get('/sent', isAuthenticated, (req, res, next) => {
   req.db.message.get_messages_by_sender([req.user[0].id])
     .then(messages => res.status(200).json(messages))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/message/id/:messageID
@@ -52,7 +52,7 @@ router.get('/sent', isAuthenticated, (req, res, next) => {
 router.get('/id/:messageID', isAuthenticated, onMessage, (req, res, next) => {
   req.db.message.get_message_by_id([req.params.id])
     .then(message => res.status(200).json(message))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/message/read
@@ -61,7 +61,7 @@ router.get('/id/:messageID', isAuthenticated, onMessage, (req, res, next) => {
 router.put('/read', isAuthenticated, messageRecipient, (req, res, next) => {
   req.db.message.mark_as_read([req.body.messageID])
     .then(r => res.status(200).send('marked'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/message
@@ -70,7 +70,7 @@ router.put('/read', isAuthenticated, messageRecipient, (req, res, next) => {
 router.put('/', isAuthenticated, messageSender, (req, res, next) => {
   req.db.message.edit_content([req.body.messageID, req.body.content])
     .then(r => res.status(200).send('edited'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // DELETE /api/message/:messageID
@@ -78,7 +78,7 @@ router.put('/', isAuthenticated, messageSender, (req, res, next) => {
 router.delete('/:messageID', isAuthenticated, onMessage, (req, res, next) => {
   req.db.message.delete_message([req.params.messageID])
     .then(r => res.status(200).send('deleted'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 module.exports = router;

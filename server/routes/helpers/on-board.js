@@ -11,5 +11,5 @@ module.exports = (req,res,next) => {
         res.status(403).send('approved team members only');
       }
     })
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 }

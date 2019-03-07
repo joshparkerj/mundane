@@ -11,5 +11,5 @@ module.exports = (req,res,next) => {
         res.status(403).send('you can only see details for your team mates');
       }
     })
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 }

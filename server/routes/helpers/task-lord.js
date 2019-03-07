@@ -11,5 +11,5 @@ module.exports = (req,res,next) => {
         res.status(403).send('not your task');
       }
     })
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 }
