@@ -7858,17 +7858,24 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"commentID\": {{c4_id}}\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/comment",
+							"raw": "localhost:8080/api/comment/:commentID",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"comment"
+								"comment",
+								":commentID"
+							],
+							"variable": [
+								{
+									"key": "commentID",
+									"value": "{{c4_id}}"
+								}
 							]
 						}
 					},
@@ -8021,17 +8028,24 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"commentID\": {{c12_id}}\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/comment",
+							"raw": "localhost:8080/api/comment/:commentID",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"comment"
+								"comment",
+								":commentID"
+							],
+							"variable": [
+								{
+									"key": "commentID",
+									"value": "{{c12_id}}"
+								}
 							]
 						}
 					},
@@ -8279,17 +8293,24 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"commentID\": {{c2_id}}\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/comment",
+							"raw": "localhost:8080/api/comment/:commentID",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"api",
-								"comment"
+								"comment",
+								":commentID"
+							],
+							"variable": [
+								{
+									"key": "commentID",
+									"value": "{{c2_id}}"
+								}
 							]
 						}
 					},
@@ -8434,9 +8455,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -8449,10 +8467,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"taskID\": {{task_id}}\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/comment/on-task",
+							"raw": "localhost:8080/api/comment/on-task/:taskID",
 							"host": [
 								"localhost"
 							],
@@ -8460,7 +8478,14 @@
 							"path": [
 								"api",
 								"comment",
-								"on-task"
+								"on-task",
+								":taskID"
+							],
+							"variable": [
+								{
+									"key": "taskID",
+									"value": "{{task_id}}"
+								}
 							]
 						}
 					},
@@ -8493,9 +8518,6 @@
 							}
 						}
 					],
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"method": "GET",
 						"header": [
@@ -8508,10 +8530,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"commentID\": {{c1_id}}\n}"
+							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/comment/by-id",
+							"raw": "localhost:8080/api/comment/by-id/:commentID",
 							"host": [
 								"localhost"
 							],
@@ -8519,7 +8541,14 @@
 							"path": [
 								"api",
 								"comment",
-								"by-id"
+								"by-id",
+								":commentID"
+							],
+							"variable": [
+								{
+									"key": "commentID",
+									"value": "{{c1_id}}"
+								}
 							]
 						}
 					},

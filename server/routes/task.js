@@ -84,7 +84,7 @@ router.put('/group', isAuthenticated, onTask, (req, res, next) => {
     .catch(serverError(res));
 })
 
-// PUT /api/task/start-date
+// PUT /api/task/start_date
 // set start date
 router.put('/start_date', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_start_date([req.body.taskID, req.body.start_date])
@@ -92,7 +92,7 @@ router.put('/start_date', isAuthenticated, onTask, (req, res, next) => {
     .catch(serverError(res));
 })
 
-// PUT /api/task/end-date
+// PUT /api/task/end_date
 // set end date
 router.put('/end_date', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_end_date([req.body.taskID, req.body.end_date])
@@ -100,7 +100,7 @@ router.put('/end_date', isAuthenticated, onTask, (req, res, next) => {
     .catch(serverError(res));
 })
 
-// PUT /api/task/time-est
+// PUT /api/task/time_est
 // set time estimate
 router.put('/time_est', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_time_est([req.body.taskID, req.body.time_est])
