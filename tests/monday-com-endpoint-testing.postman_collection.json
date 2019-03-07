@@ -1166,13 +1166,20 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"userID\":26\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/user/follow/26",
+							"raw": "localhost:8080/api/user/follow",
 							"host": [
 								"localhost"
 							],
@@ -1180,8 +1187,7 @@
 							"path": [
 								"api",
 								"user",
-								"follow",
-								"26"
+								"follow"
 							]
 						}
 					},
@@ -1215,13 +1221,20 @@
 					],
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"userID\":30\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/user/follow/30",
+							"raw": "localhost:8080/api/user/follow",
 							"host": [
 								"localhost"
 							],
@@ -1229,8 +1242,7 @@
 							"path": [
 								"api",
 								"user",
-								"follow",
-								"30"
+								"follow"
 							]
 						}
 					},
@@ -1588,13 +1600,20 @@
 					],
 					"request": {
 						"method": "PUT",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "raw",
-							"raw": ""
+							"raw": "{\n\t\"userID\":26\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/user/unfollow/26",
+							"raw": "localhost:8080/api/user/unfollow",
 							"host": [
 								"localhost"
 							],
@@ -1602,8 +1621,7 @@
 							"path": [
 								"api",
 								"user",
-								"unfollow",
-								"26"
+								"unfollow"
 							]
 						}
 					},
@@ -1698,7 +1716,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "localhost:8080/api/user/details/me",
+							"raw": "localhost:8080/api/user/my-details",
 							"host": [
 								"localhost"
 							],
@@ -1706,8 +1724,7 @@
 							"path": [
 								"api",
 								"user",
-								"details",
-								"me"
+								"my-details"
 							]
 						}
 					},
@@ -11922,6 +11939,130 @@
 					"response": []
 				},
 				{
+					"name": "create team \"chuck private team\"",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b00507cd-3fd1-46bf-8070-7be7a8548fc8",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "804ae2cd-02b2-4a7e-b969-4b5fc50d1887",
+								"exec": [
+									"pm.environment.set('cpt_team_id', parseInt(pm.response.json().id));",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body is json\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response contains id\", function () {",
+									"    pm.expect(pm.response.json().id).to.be.a('number');",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"chuck private team\"\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/team",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"team"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create board \"chuck private board\"",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f81d193c-f74f-4fba-a66e-df9cbdbfbf1c",
+								"exec": [
+									"pm.environment.set('cpb_board_id', pm.response.json().id)",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response body is json\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"",
+									"pm.test(\"Response includes id number\", function () {",
+									"    pm.expect(pm.response.json().id).to.be.a('number');",
+									"});",
+									"",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"chuck private board\",\n\t\"teamID\": {{cpt_team_id}}\n}"
+						},
+						"url": {
+							"raw": "localhost:8080/api/board",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"board"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "comment \"I stole a car.\"",
 					"event": [
 						{
@@ -12180,6 +12321,7 @@
 									"    pm.expect(pm.response.json().boards.some(e => e.name === 'product')).to.be.true;",
 									"    pm.expect(pm.response.json().boards.some(e => e.name === 'marketing')).to.be.true;",
 									"    pm.expect(pm.response.json().boards.some(e => e.name === 'villainy')).to.be.true;",
+									"    pm.expect(pm.response.json().boards.some(e => e.name === 'chuck private board' && e.private)).to.be.true;",
 									"    pm.expect(pm.response.json().tasks.some(e => e.name === 'design')).to.be.true;",
 									"    pm.expect(pm.response.json().tasks.some(e => e.name === 'choose materials')).to.be.true;",
 									"    pm.expect(pm.response.json().tasks.some(e => e.name === 'brochure')).to.be.true;",
