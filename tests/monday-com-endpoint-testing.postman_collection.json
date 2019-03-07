@@ -4852,7 +4852,7 @@
 							"raw": "{\n\t\"taskID\": {{brochure_task_id}},\n\t\"start_date\": \"{{start_date}}\"\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/task/start-date",
+							"raw": "localhost:8080/api/task/start_date",
 							"host": [
 								"localhost"
 							],
@@ -4860,7 +4860,7 @@
 							"path": [
 								"api",
 								"task",
-								"start-date"
+								"start_date"
 							]
 						}
 					},
@@ -4920,7 +4920,7 @@
 							"raw": "{\n\t\"taskID\": {{brochure_task_id}},\n\t\"end_date\": \"{{end_date}}\"\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/task/end-date",
+							"raw": "localhost:8080/api/task/end_date",
 							"host": [
 								"localhost"
 							],
@@ -4928,7 +4928,7 @@
 							"path": [
 								"api",
 								"task",
-								"end-date"
+								"end_date"
 							]
 						}
 					},
@@ -4975,7 +4975,7 @@
 							"raw": "{\n\t\"taskID\": {{brochure_task_id}},\n\t\"time_est\": 3.8\n}"
 						},
 						"url": {
-							"raw": "localhost:8080/api/task/time-est",
+							"raw": "localhost:8080/api/task/time_est",
 							"host": [
 								"localhost"
 							],
@@ -4983,7 +4983,7 @@
 							"path": [
 								"api",
 								"task",
-								"time-est"
+								"time_est"
 							]
 						}
 					},
