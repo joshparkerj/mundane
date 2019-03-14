@@ -25,11 +25,11 @@ class MyProfile extends Component {
     const value = e.target.value;
     this.setState({ [key]: value })
   }
+
   handleClickUrl = (close) => {
     this.props.setPic({ pic: this.state.url })
-    close() 
+    close()
   }
-
 
   render() {
     return (
@@ -42,16 +42,15 @@ class MyProfile extends Component {
                   <Popup className='popup_wrapper'
                     trigger={<div className='hover_wrapper'>
                       <div className='profile-image-component'>
-                        <img className="profile-image-hover" src={this.props.user.pic}></img>
+                        <img className="profile-image-hover" src={this.props.user.pic} alt=""></img>
                         <div className='change_picture_hover'>
-                          <i class="fas fa-user-plus"></i>
+                          <i className="fas fa-user-plus"></i>
                           <div className='change-picture-text'>Change profile picture</div>
                         </div>
                       </div>
                     </div>}
                     modal contentStyle={contentStyle}>
                     {close => (
-                      // <div className='popup_wrapper'>
                         <div className="picture_edit_form">
                           <div className="close" onClick={close}>&times;</div>
                           <div className="header"> Change picture</div>
@@ -61,12 +60,11 @@ class MyProfile extends Component {
                           </div>
                           <button className="save_url_btn" onClick={() => this.handleClickUrl(close)}>Save</button>
                           <br />
-                          <div className="header2" onclick={() => this.handleClickRemovePic(close)}> Remove picture
+                          <div className="header2" onClick={() => this.handleClickRemovePic(close)}> Remove picture
                           <br />
-                            <i class="fas fa-trash-alt" ></i>
+                            <i className="fas fa-trash-alt" ></i>
                           </div>
                         </div>
-                      // </div>
                     )}
                   </Popup>
                 </div>
@@ -119,4 +117,5 @@ class MyProfile extends Component {
   }
 
 }
+
 export default connect(null, { setPic })(MyProfile)

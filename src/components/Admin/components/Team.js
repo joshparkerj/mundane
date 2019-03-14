@@ -6,9 +6,9 @@ import TeamMember from './TeamMember';
 
 class Team extends Component {
 
-  rosterMapper = teamName => (e, i) => {
+  rosterMapper = (e, i) => {
     return (
-      <TeamMember teamName={teamName} teamMember={e} key={i} />
+      <TeamMember teamMember={e} key={i} />
     )
   }
 
@@ -16,14 +16,20 @@ class Team extends Component {
     const { props: { dashboard: { roster } }, rosterMapper } = this;
     return (
       <div className="team" key={i}>
-        <h1>{teamName} {roster.some(e => e.team_name === teamName && e.manager) ? '' : '(Your team)'}</h1>
+        <h1>
+          {teamName} {roster.some(e => e.team_name === teamName && e.manager) ? '' : '(Your team)'}
+        </h1>
         <table className="team-table-wrapper">
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-          </tr>
-          {roster ? roster.filter(e => e.team_name === teamName).map(rosterMapper(teamName)) : ''}
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+            </tr>
+          </thead>
+          <tbody>
+            {roster ? roster.filter(e => e.team_name === teamName).map(rosterMapper) : ''}
+          </tbody>
         </table>
       </div>
     )

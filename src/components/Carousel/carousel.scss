@@ -1,15 +1,14 @@
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 
-.market-land-container{
-    margin-top:150px;
+.market-land-container {
+  margin-top: 150px;
 }
+
 .test-div {
-  // background:yellow;
   display: flex;
   justify-content: center;
   align-items: center;
-  //   border: 1px solid black;
   background: rgba(0, 0, 0, 0.1);
   height: 50vh;
   opacity: 0.25;
@@ -20,31 +19,35 @@
     top: 30px;
     left: 50%;
     transform: translate(-50%, -50%);
-    width:100%;
+    width: 100%;
   }
 }
+
 .market-top-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom:50px;
+  margin-bottom: 50px;
 }
+
 .upper-text-container {
   width: 1000px;
   height: auto;
-  // border:1px solid black;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom:0px;
+  margin-bottom: 0px;
 }
+
 #div1 {
   border-color: blue;
 }
+
 #div2 {
   border-color: red;
 }
+
 .slick-slide {
   padding: 50px;
   width: 50vw !important;
@@ -58,6 +61,7 @@
     opacity: 1;
   }
 }
+
 .slick-prev,
 .slick-next {
   font-size: 30px !important;
@@ -73,57 +77,66 @@
     opacity: 0.5;
   }
 }
+
 .slick-next {
   right: 24%;
 }
+
 .slick-prev {
   left: 71%;
 }
+
 .slick-prev:before,
 .slick-next:before {
   content: "" !important;
 }
+
 .carousel-image {
   background-size: cover;
   background-repeat: no-repeat;
   height: 100%;
   width: 100%;
 }
-.quote-main-container{
-  display:flex;
+
+.quote-main-container {
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin-top:3%;
+  margin-top: 3%;
 }
-.lower-quote-container{
-    // border:1px solid black;
-    margin-left: 25px;
-    text-align: left;
-    width:600px;
+
+.lower-quote-container {
+  margin-left: 25px;
+  text-align: left;
+  width: 600px;
 }
-.workflow-container{
-    height:500px;
-    width:100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+
+.workflow-container {
+  height: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.workflow-text{
-    display: flex;
-    justify-content: center;
-    margin-bottom:50px;
+
+.workflow-text {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
 }
-.lower-quote{
-  font-size:1.25em;
+
+.lower-quote {
+  font-size: 1.25em;
   font-weight: 700;
-  margin-bottom:.5%;
+  margin-bottom: .5%;
 }
-.quote-image{
-  height:125px;
-  width:125px;
-  border-radius:100px;
+
+.quote-image {
+  height: 125px;
+  width: 125px;
+  border-radius: 100px;
   background-size: 175%;
   background-position: center;
   background-repeat: no-repeat;
-  border:1px solid red;
+  border: 1px solid red;
 }

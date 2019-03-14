@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './Password.scss';
 import axios from "axios";
 
-export default class Password extends Component {
+class Password extends Component {
+
   state = {
     currentPassword: '',
     newPassword: '',
@@ -54,9 +55,10 @@ export default class Password extends Component {
             <input value={this.state.confirmNewPassword} name='confirmNewPassword' type='password' className='confirm_new_password' onChange={this.handleChange}></input>
           </div>
         </div>
-
         <button onClick={this.savePassword} className='save-btn'>Save</button>
       </div>
     )
   }
 }
+
+export default Password;

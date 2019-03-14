@@ -1,23 +1,24 @@
 @import '../../views/marketing/variables.scss';
 
 
-.get-started{
-    width:300px;
-    height:45px;
-    border: none;
-    background-color:$blue-button;
-    border-radius:25px;
-    color:white;
-    font-size: 1em;
-    font-weight: 500;
-    transition: .3s;
+.get-started {
+  width: 300px;
+  height: 45px;
+  border: none;
+  background-color: $blue-button;
+  border-radius: 25px;
+  color: white;
+  font-size: 1em;
+  font-weight: 500;
+  transition: .3s;
 
 
-    &:hover{
-        background-color: #3335c7;
-        cursor: pointer;
-    }
-    &:focus {
-        color: white;
-    }
+  &:hover {
+    background-color: #3335c7;
+    cursor: pointer;
+  }
+
+  &:focus {
+    color: white;
+  }
 }

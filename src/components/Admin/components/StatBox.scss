@@ -1,86 +1,87 @@
-* {
-  margin: 0;
-  padding: 0;
-}
 .purple {
   display: flex;
   flex-flow: column;
-  background-color:purple;
+  background-color: purple;
   width: 425px;
   height: 130px;
   border-radius: 15px;
   margin-bottom: 2%;
   margin-right: 10px;
-  
 }
+
 .green {
   display: flex;
   flex-flow: column;
-  background-color:green;
+  background-color: green;
   width: 425px;
   height: 130px;
   border-radius: 15px;
   margin-bottom: 2%;
   margin-right: 10px;
 }
+
 .orange {
   display: flex;
   flex-flow: column;
-  background-color:orange;
+  background-color: orange;
   width: 425px;
   height: 130px;
   border-radius: 15px;
   margin-bottom: 2%;
 }
-.box-title{
+
+.box-title {
   display: flex;
   justify-content: space-between;
   flex-flow: row;
-  margin-top:2%;
-  margin-left:3%;
-  margin-right:4%;
+  margin-top: 2%;
+  margin-left: 3%;
+  margin-right: 4%;
   color: white;
+}
 
-}
-.col-container{
-  display:flex;
+.col-container {
+  display: flex;
   justify-content: space-evenly;
-  
 }
-.box-col{
+
+.box-col {
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
   color: white;
-  margin-top:3%;
-  h1{
+  margin-top: 3%;
+
+  h1 {
     font-size: 28px
   }
+
   h3 {
     font-size: 14px;
   }
 }
 
-.stat-wrapper{
+.stat-wrapper {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  width:900px;
-  height:200px;
-  margin-top:5%;
-  // margin-left:10%;
+  width: 900px;
+  height: 200px;
+  margin-top: 5%;
 }
-.empty-box{
+
+.empty-box {
   display: flex;
   justify-content: center;
   width: 425px;
   height: 130px;
   background-color: teal;
   border-radius: 15px;
+
   h1 {
     display: flex;
     align-self: center;
-    color:white
+    color: white
   }
 }
 
@@ -91,20 +92,23 @@
 .team-table-wrapper {
   width: 750px;
   margin-bottom: 10%;
-  th{
-  background-color:white;
-  color:black;
-  width: 250px;
-  border-bottom: solid black 1px
+
+  th {
+    background-color: white;
+    color: black;
+    width: 250px;
+    border-bottom: solid black 1px
   }
+
   td {
-    background-color:white;
+    background-color: white;
     border-bottom: solid black 1px;
   }
 }
 
 .admin-general-wrapper {
   width: 900px;
+
   h1 {
     font-size: 22px;
   }

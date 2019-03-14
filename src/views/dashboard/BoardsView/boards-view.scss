@@ -6,10 +6,9 @@
   flex-direction: column;
   align-items: center;
   position: relative;
-  //   background-color:blue;
 }
+
 .grouped-teams {
-  // border:1px solid black;
   margin-bottom: 10px;
 }
 
@@ -20,54 +19,57 @@
   letter-spacing: 5px;
   color: $purple-main;
 }
-.title-container{
-  display:flex;
+
+.title-container {
+  display: flex;
   align-items: center;
   justify-content: left;
   position: relative;
-  margin-bottom:1%;
-  padding:0 5px
+  margin-bottom: 1%;
+  padding: 0 5px
 }
-.add-board{
+
+.add-board {
   position: absolute;
-  bottom:5%;
-  right:0;
+  bottom: 5%;
+  right: 0;
   display: flex;
-  
-  input{
-    padding:10px;
-    width:200px;
-    border:none;
-    border-bottom:1px solid $purple-main;
-    margin-right:3px;
+
+  input {
+    padding: 10px;
+    width: 200px;
+    border: none;
+    border-bottom: 1px solid $purple-main;
+    margin-right: 3px;
     color: $purple-main;
     font-size: .75em;
 
-    &::placeholder{
-      font-size:1.25em;
-      color:$purple-main;
+    &::placeholder {
+      font-size: 1.25em;
+      color: $purple-main;
     }
   }
-  button{
+
+  button {
     text-align: center;
-    height:40px;
-    width:40px;
-    padding:0 2px 3px 0;
+    height: 40px;
+    width: 40px;
+    padding: 0 2px 3px 0;
     background-color: white;
-    color:$purple-main;
-    border-radius:50px;
-    border:1px solid $purple-main;
-    font-size:1.55em;
+    color: $purple-main;
+    border-radius: 50px;
+    border: 1px solid $purple-main;
+    font-size: 1.55em;
     font-weight: 500;
     transition: .25s ease;
 
-    &:hover{
+    &:hover {
       opacity: .75;
       cursor: pointer;
     }
 
-    &:focus{
-      outline:none;
+    &:focus {
+      outline: none;
     }
   }
 }

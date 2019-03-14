@@ -1,37 +1,34 @@
 .board-wrapper {
   width: 75vw;
-  //   margin-top: 300px;
-  //   //   display: flex;
-  //   padding-left: 30px;
-  //   padding-right: 30px;
   margin-bottom: 50px;
-  //   flex-direction: column;
 }
+
 table {
   width: stretch;
   border-spacing: 1px;
   font-size: 0.75em;
+
   thead {
     tr {
       th {
         color: black;
-        text-align: center;
         text-transform: uppercase;
         letter-spacing: 1px;
         font-size: 1.1em;
       }
     }
   }
+
   tr {
     background-color: rgba(240, 240, 240, 1);
+
     &:hover {
       background-color: rgba(240, 240, 240, 0.75);
       transition: 0.5s ease;
     }
+
     th,
     td {
-      text-align: center;
-      // border: 1px solid black;
       padding: 5px;
       position: relative;
 
@@ -42,40 +39,36 @@ table {
       &:focus,
       &:focus-within {
         outline: none;
+
         .column-modal-container {
           display: flex;
         }
       }
     }
-    &.selected {
-      th,
-      td {
-        // background-color: white;
-      }
-    }
   }
 }
-.left-align{
-    text-align:left;
-    padding:0 15px;
-    font-weight: 700;
+
+.left-align {
+  text-align: left;
+  padding: 0 15px;
+  font-weight: 700;
 }
+
 .input-row {
   width: 100%;
   text-align: left;
-  // border: 1px solid black;
   padding: 5px;
-  //   background-color: gray;
 }
+
 .add-row-input {
   width: stretch;
   padding: 16px;
+
   &:focus {
     outline: none;
   }
-  // background-color:lightgray;
-  // border:1px solid black;
 }
+
 .add-row-input {
   width: stretch;
   padding: 16px;

@@ -7,16 +7,12 @@ import {Switch,Route} from 'react-router-dom';
 import Marketing from './views/marketing/Marketing'
 import {connect} from 'react-redux'
 import {getSession} from './redux/actions'
-import WhyUs from './views/marketing/MarketWhyUs/MarketWhyUs';
-import Inbox from './components/Inbox/Inbox';
-
 
 class App extends Component {
+
   componentDidMount = () => {
-  
     this.props.getSession()
   }
-  
 
   render() {
     return (
@@ -26,24 +22,24 @@ class App extends Component {
             <Route path = '/marketing' component = {Marketing} />
             {
               this.props.userExists && (
-                <Switch> 
-                  <Route path="/dashboard" component = {DashboardLanding} />    
+                <Switch>
+                  <Route path="/dashboard" component = {DashboardLanding} />
                 </Switch>
               )
             }
-            
             <Route component={Marketing} />
           </Switch>
         </ConnectedRouter>
-        
       </div>
-
     );
   }
+
 }
+
 const mapStateToProps = state => {
   return {
     userExists: !!state.user.user
   }
 }
+
 export default connect(mapStateToProps,{getSession})(App);
