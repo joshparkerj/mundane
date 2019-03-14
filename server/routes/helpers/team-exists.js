@@ -10,6 +10,6 @@ module.exports = (req,res,next) => {
         res.status(404).send('team not found');
       }
     })
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 }
 

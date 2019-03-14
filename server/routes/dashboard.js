@@ -39,7 +39,7 @@ router.get('/', isAuthenticated, (req,res,next) => {
       res.locals.dash.messages = messages;
       res.status(200).json(res.locals.dash);
     })
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 
 // GET /api/dashboard/team/:teamID
@@ -68,7 +68,7 @@ router.get('/team/:teamID', isAuthenticated, onTeam, (req, res, next) => {
       res.locals.dash.comments = comments;
       res.status(200).json(res.locals.dash);
     })
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 router.get('/')

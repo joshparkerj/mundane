@@ -9,5 +9,5 @@ module.exports = (req,res,next) => {
         next();
       }
     })
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 }

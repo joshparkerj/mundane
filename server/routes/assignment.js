@@ -21,7 +21,7 @@ router.post('/', isAuthenticated, onTask, (req, res, next) => {
     ])
     .then(() => req.db.assignment.by_me([req.user[0].id]))
     .then(a => res.status(200).json(a[0]))
-    .catch(err => serverError(err, res))
+    .catch(serverError(res))
 })
 
 // GET /api/assignment
@@ -29,7 +29,7 @@ router.post('/', isAuthenticated, onTask, (req, res, next) => {
 router.get('/', isAuthenticated, (req, res, next) => {
   req.db.assignment.on_me([req.user[0].id])
     .then(a => res.status(200).json(a))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/assignment/by-me
@@ -37,7 +37,7 @@ router.get('/', isAuthenticated, (req, res, next) => {
 router.get('/by-me', isAuthenticated, (req, res, next) => {
   req.db.assignment.by_me([req.user[0].id])
     .then(a => res.status(200).json(a))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/assignment/by-id/:assignmentID
@@ -49,7 +49,7 @@ router.get(
   (req, res, next) => {
     req.db.assignment.by_id([req.params.assignmentID])
       .then(a => res.status(200).json(a))
-      .catch(err => serverError(err, res));
+      .catch(serverError(res));
   })
 
 // GET /api/assignment/all
@@ -57,7 +57,7 @@ router.get(
 router.get('/all', isAuthenticated, (req, res, next) => {
   req.db.assignment.all([req.user[0].id])
     .then(a => res.status(200).json(a))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // DELETE /api/assignment/:assignmentID
@@ -69,7 +69,7 @@ router.delete(
   (req, res, next) => {
     req.db.assignment.delete([req.params.assignmentID])
       .then(() => res.status(200).send('deleted assignment'))
-      .catch(err => serverError(err, res));
+      .catch(serverError(res));
   })
 
 module.exports = router;

@@ -21,7 +21,7 @@ router.post('/', isAuthenticated, onTask, (req, res, next) => {
     ])
     .then(() => req.db.comment.by_me([req.user[0].id]))
     .then(comments => res.status(200).json(comments[0]))
-    .catch(err => serverError(err, res))
+    .catch(serverError(res))
 })
 
 // GET /api/comment/by-me
@@ -29,7 +29,7 @@ router.post('/', isAuthenticated, onTask, (req, res, next) => {
 router.get('/by-me', isAuthenticated, (req, res, next) => {
   req.db.comment.by_me([req.user[0].id])
     .then(comments => res.status(200).json(comments))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/comment/on-task/:taskID
@@ -38,7 +38,7 @@ router.get('/by-me', isAuthenticated, (req, res, next) => {
 router.get('/on-task/:taskID', isAuthenticated, onTask, (req, res, next) => {
   req.db.comment.on_task([req.params.taskID])
     .then(comments => res.status(200).json(comments))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/comment/by-id/:commentID
@@ -46,7 +46,7 @@ router.get('/on-task/:taskID', isAuthenticated, onTask, (req, res, next) => {
 router.get('/by-id/:commentID', isAuthenticated, onComment, (req, res, next) => {
   req.db.comment.by_id([req.params.commentID])
     .then(comment => res.status(200).json(comment))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // GET /api/comment
@@ -54,7 +54,7 @@ router.get('/by-id/:commentID', isAuthenticated, onComment, (req, res, next) => 
 router.get('/', isAuthenticated, (req, res, next) => {
   req.db.comment.all([req.user[0].id])
     .then(comments => res.status(200).json(comments))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/comment
@@ -63,42 +63,42 @@ router.get('/', isAuthenticated, (req, res, next) => {
 router.put('/', isAuthenticated, commentLord, (req, res, next) => {
   req.db.comment.edit([req.body.commentID, req.body.content])
     .then(() => res.status(200).send('updated comment'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 // DELETE /api/comment/:commentID
 // don't forget the commentID param
 router.delete('/:commentID', isAuthenticated, commentLord, (req, res, next) => {
   req.db.comment.delete([req.params.commentID])
     .then(() => res.status(200).send('deleted comment'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 // POST /api/comment/read
 // mark comment as read
 router.post('/read', isAuthenticated, (req,res,next) => {
   req.db.comment.mark_read([req.body.commentID, req.user[0].id])
     .then(() => res.status(200).send('marked read'))
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 // POST /api/comment/unread
 // mark comment as unread
 router.post('/unread', isAuthenticated, (req,res,next) => {
   req.db.comment.mark_unread([req.body.commentID, req.user[0].id])
     .then(() => res.status(200).send('marked unread'))
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 // POST /api/comment/like
 // like comment
 router.post('/like', isAuthenticated, (req,res,next) => {
   req.db.comment.like([req.body.commentID, req.user[0].id])
     .then(() => res.status(200).send('liked'))
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 // POST /api/comment/unlike
 // unlike comment
 router.post('/unlike', isAuthenticated, (req,res,next) => {
   req.db.comment.unlike([req.body.commentID, req.user[0].id])
     .then(() => res.status(200).send('unliked'))
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 
 module.exports = router;

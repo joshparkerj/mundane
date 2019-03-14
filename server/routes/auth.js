@@ -53,7 +53,7 @@ router.post('/register', (req, res, next) => {
                     boards: boards
                   })
                 })
-                .catch(err => serverError(err, res))
+                .catch(serverError(res))
             });
 
           })
@@ -95,7 +95,7 @@ router.post('/login', (req, res, next) => {
                   loginResponse.teams = teams;
                   res.json(loginResponse)
                 })
-                .catch(err => serverError(err, res))
+                .catch(serverError(res))
             });
           })
           .catch(error => console.log(error))
@@ -125,7 +125,7 @@ router.get('/session', (req, res) => {
         sessionResponse.boards = boards;
         res.json(sessionResponse)
       })
-      .catch(err => serverError(err, res))
+      .catch(serverError(res))
   } else {
     console.log('no session found')
     res.status(401).send('session not found')
@@ -139,7 +139,7 @@ router.delete('/me', isAuthenticated, (req, res, next) => {
       req.logout();
       res.status(200).send('deleted');
     })
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/auth/password
@@ -165,10 +165,10 @@ router.put('/password', isAuthenticated, (req, res, next) => {
             return req.db.user.update_password([hash, req.user[0].id])
           })
           .then(() => res.status(200).send('password updated'))
-          .catch(err => serverError(err, res));
+          .catch(serverError(res));
       }
     })
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 module.exports = router;

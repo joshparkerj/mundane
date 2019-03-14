@@ -10,5 +10,5 @@ module.exports = (req, res, next) => {
         res.status(403).send('manager only');
       }
     })
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 }

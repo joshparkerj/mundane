@@ -25,7 +25,7 @@ router.post('/', isAuthenticated, onBoard, (req, res, next) => {
     ])
     .then(() => req.db.task.get_by_name([req.body.name]))
     .then(task => res.status(200).json(task[0]))
-    .catch(err => serverError(err, res))
+    .catch(serverError(res))
 })
 
 // GET /api/task
@@ -33,7 +33,7 @@ router.post('/', isAuthenticated, onBoard, (req, res, next) => {
 router.get('/', isAuthenticated, (req, res, next) => {
   req.db.task.accessible([req.user[0].id])
     .then(tasks => res.status(200).json(tasks))
-    .catch(err => serverError(err, res))
+    .catch(serverError(res))
 })
 
 // GET /api/task/by-board/:boardID
@@ -41,7 +41,7 @@ router.get('/', isAuthenticated, (req, res, next) => {
 router.get('/by-board/:boardID', isAuthenticated, onBoard, (req,res,next) => {
   req.db.task.by_board([req.params.boardID])
     .then(tasks => res.status(200).json(tasks))
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 
 // GET /api/task/by-user/:userID
@@ -49,7 +49,7 @@ router.get('/by-board/:boardID', isAuthenticated, onBoard, (req,res,next) => {
 router.get('/by-user/:userID', isAuthenticated, teamMates, (req, res, next) => {
   req.db.task.get_tasks_by_user([req.params.userID])
     .then(tasks => res.status(200).json(tasks))
-    .catch(err => serverError(err,res));
+    .catch(serverError(res));
 })
 
 // PUT /api/task/priority
@@ -57,7 +57,7 @@ router.get('/by-user/:userID', isAuthenticated, teamMates, (req, res, next) => {
 router.put('/priority', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_priority([req.body.taskID, req.body.priority])
     .then(() => res.status(200).send('priority set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/task/position
@@ -65,7 +65,7 @@ router.put('/priority', isAuthenticated, onTask, (req, res, next) => {
 router.put('/position', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_position([req.body.taskID, req.body.position])
     .then(() => res.status(200).send('position set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/task/status
@@ -73,7 +73,7 @@ router.put('/position', isAuthenticated, onTask, (req, res, next) => {
 router.put('/status', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_status([req.body.taskID, req.body.status])
     .then(() => res.status(200).send('status set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 // PUT /api/task/group
@@ -81,37 +81,37 @@ router.put('/status', isAuthenticated, onTask, (req, res, next) => {
 router.put('/group', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_group([req.body.taskID, req.body.group])
     .then(() => res.status(200).send('group set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
-// PUT /api/task/start-date
+// PUT /api/task/start_date
 // set start date
 router.put('/start_date', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_start_date([req.body.taskID, req.body.start_date])
     .then(() => res.status(200).send('start date set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
-// PUT /api/task/end-date
+// PUT /api/task/end_date
 // set end date
 router.put('/end_date', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_end_date([req.body.taskID, req.body.end_date])
     .then(() => res.status(200).send('end date set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
-// PUT /api/task/time-est
+// PUT /api/task/time_est
 // set time estimate
 router.put('/time_est', isAuthenticated, onTask, (req, res, next) => {
   req.db.task.set_time_est([req.body.taskID, req.body.time_est])
     .then(() => res.status(200).send('time estimate set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 router.put('/name', isAuthenticated, taskLord, (req, res, next) => {
   req.db.task.set_name([req.body.taskID, req.body.name])
     .then(() => res.status(200).send('name set'))
-    .catch(err => serverError(err, res));
+    .catch(serverError(res));
 })
 
 module.exports = router;
