@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function PersonalAssistantContentHeader({ pwc, nwc, dv }) {
   return (
@@ -31,5 +32,11 @@ function PersonalAssistantContentHeader({ pwc, nwc, dv }) {
     </div>
   );
 }
+
+PersonalAssistantContentHeader.propTypes = {
+  pwc: PropTypes.string.isRequired,
+  nwc: PropTypes.string.isRequired,
+  dv: PropTypes.string.isRequired,
+};
 
 export default PersonalAssistantContentHeader;
