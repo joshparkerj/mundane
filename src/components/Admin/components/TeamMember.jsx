@@ -1,52 +1,61 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 
-class TeamMember extends Component {
-  state = {
-    buttonDisabled: false,
-    approvedTeamMember: false,
-    buttonText: 'Approve',
-  };
+const TeamMember = function TeamMember({ teamMember }) {
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [approvedTeamMember, setApprovedTeamMember] = useState(false);
+  const [buttonText, setButtonText] = useState('Approve');
 
-  approveUser = () => {
-    this.setState({ buttonDisabled: true, buttonText: 'one moment' });
+  const approveUser = () => {
+    setButtonDisabled(true);
+    setButtonText('one moment');
     axios.post('/api/team/approval', {
-      teamID: this.props.teamMember.team_id,
-      memberID: this.props.teamMember.id,
+      teamID: teamMember.team_id,
+      memberID: teamMember.id,
     }).then(() => {
-      this.setState({ approvedTeamMember: true });
+      setApprovedTeamMember(true);
     });
   };
 
-  render() {
-    const { props: { teamMember }, state: { buttonDisabled, approvedTeamMember, buttonText } } = this;
-    if (teamMember.approved || approvedTeamMember) {
-      return (
-        <tr>
-          <td>
-            {teamMember.name}
-            {' '}
-            {teamMember.manager ? '(manager)' : ''}
-          </td>
-          <td>{teamMember.email}</td>
-          <td>{teamMember.phone}</td>
-        </tr>
-      );
-    }
+  if (teamMember.approved || approvedTeamMember) {
     return (
       <tr>
-        <td>{teamMember.name}</td>
         <td>
-          This user has requested to join your team.
+          {teamMember.name}
+          {' '}
+          {teamMember.manager ? '(manager)' : ''}
         </td>
-        <td>
-          <button onClick={this.approveUser} disabled={buttonDisabled}>
-            {buttonText}
-          </button>
-        </td>
+        <td>{teamMember.email}</td>
+        <td>{teamMember.phone}</td>
       </tr>
     );
   }
-}
+  return (
+    <tr>
+      <td>{teamMember.name}</td>
+      <td>
+        This user has requested to join your team.
+      </td>
+      <td>
+        <button onClick={approveUser} disabled={buttonDisabled} type="button">
+          {buttonText}
+        </button>
+      </td>
+    </tr>
+  );
+};
+
+TeamMember.propTypes = {
+  teamMember: PropTypes.exact({
+    team_id: PropTypes.string,
+    id: PropTypes.string,
+    approved: PropTypes.bool,
+    name: PropTypes.string,
+    manager: PropTypes.string,
+    email: PropTypes.string,
+    phone: PropTypes.string,
+  }).isRequired,
+};
 
 export default TeamMember;
