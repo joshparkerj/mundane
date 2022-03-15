@@ -1,21 +1,21 @@
-import {combineReducers,createStore,applyMiddleware} from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import { connectRouter, routerMiddleware } from 'connected-react-router';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from './reducer';
-import { connectRouter , routerMiddleware} from 'connected-react-router';
-import {composeWithDevTools} from 'redux-devtools-extension'
 import history from '../history';
 
-const rootReducer =  combineReducers({
+const rootReducer = combineReducers({
   router: connectRouter(history),
-  user : reducer
-})
+  user: reducer,
+});
 
 export default createStore(
   rootReducer,
   composeWithDevTools(
     applyMiddleware(
       thunk,
-      routerMiddleware(history)
-    )
-  )
+      routerMiddleware(history),
+    ),
+  ),
 );

@@ -11,8 +11,7 @@ function SupportCard({ picture, title, className }) {
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
         }}
-      >
-      </div>
+      />
       <h3>{title}</h3>
     </div>
   );

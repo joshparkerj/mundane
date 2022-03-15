@@ -1,32 +1,31 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
-import { logout } from '../../redux/actions'
-import './TopNavBar.scss'
+import { connect } from 'react-redux';
+import { logout } from '../../redux/actions';
+import './TopNavBar.scss';
 import NewTeamButton from '../NewTeam/NewTeamButton';
 
 class TopNavBar extends Component {
-
   state = {
     profileHidden: false,
-  }
+  };
 
   handleClick = () => {
-    this.setState({ profileHidden: !this.state.profileHidden })
-  }
+    this.setState({ profileHidden: !this.state.profileHidden });
+  };
 
   handleAdmin = () => {
-    this.props.page('/dashboard/admin')
-  }
+    this.props.page('/dashboard/admin');
+  };
 
   handleProfile = () => {
-    this.props.page('/dashboard/profile')
-  }
+    this.props.page('/dashboard/profile');
+  };
 
   searchSite = ({ key, target, target: { value } }) => {
     if (key === 'Enter') {
-      target.value = ''
+      target.value = '';
     }
-  }
+  };
 
   render() {
     return (
@@ -35,7 +34,7 @@ class TopNavBar extends Component {
           <div className="logo-background">
             <div className="dash-nav-logo" />
           </div>
-          <div className='first-three'>
+          <div className="first-three">
             <div className="navbar-tab">
               <span className="text">
                 <div className="add-member-span">
@@ -60,15 +59,17 @@ class TopNavBar extends Component {
             </div>
             <div className="navbar-tab">
               <div className="container">
-                <input type="text" placeholder="Search our site."
+                <input
+                  type="text"
+                  placeholder="Search our site."
                   onKeyDown={this.searchSite}
                 />
-                <div className="search"></div>
+                <div className="search" />
               </div>
             </div>
           </div>
         </div>
-        <div className='last-two'>
+        <div className="last-two">
           <div className="navbar-tab">
             <span className="text">
               <div className="add-member-span">
@@ -79,25 +80,24 @@ class TopNavBar extends Component {
           </div>
           <div className="navbar-tab">
             <div onClick={this.handleClick} className={`add-member-span ${this.state.profileHidden ? 'active' : ''}`}>
-              <img src={this.props.user.pic} className="topNav-user-pic" alt=""></img>
-              <p className='user-profile-menu' > UserProfile</p>
-              {this.state.profileHidden ?
-                (
+              <img src={this.props.user.pic} className="topNav-user-pic" alt="" />
+              <p className="user-profile-menu"> UserProfile</p>
+              {this.state.profileHidden
+                ? (
                   <div>
-                    <ul className='user-profile-menu-list'>
+                    <ul className="user-profile-menu-list">
                       <li onClick={this.handleProfile}>Profile</li>
                       <li onClick={this.handleAdmin}>Admin </li>
                       <li>Recycle Bin </li>
                       <li onClick={this.props.logout}>Logout</li>
                     </ul>
                   </div>
-                ) : (null)
-              }
+                ) : (null)}
             </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

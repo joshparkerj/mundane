@@ -30,9 +30,9 @@ export default function MarketFactCard({
           </div>
           <div className="quote-wrapper">
             <p id="quote">
-              "
+              &ldquo;
               {quote}
-              "
+              &rdquo;
             </p>
             <div id="quote-name">
               {name}
