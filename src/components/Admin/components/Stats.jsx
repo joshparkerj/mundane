@@ -6,7 +6,7 @@ function Stats() {
   return (
     <div className="stat-wrapper">
       <StatBox
-        class="purple"
+        boxClass="purple"
         title="Summary"
         col1number="10"
         col1title="Boards updated"
@@ -19,7 +19,7 @@ function Stats() {
         <h1>DATA</h1>
       </div>
       <StatBox
-        class="green"
+        boxClass="green"
         title="People Activity"
         col1number="3"
         col1title="People joined"
@@ -29,7 +29,7 @@ function Stats() {
         col3title="invited but didn't join"
       />
       <StatBox
-        class="orange"
+        boxClass="orange"
         title="Boards Created"
         col1number="5"
         col1title="Main Boards"
