@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
-import DashColumnPicker from '../DashColumnPicker/DashColumnPicker';
 import axios from 'axios';
+import DashColumnPicker from '../DashColumnPicker/DashColumnPicker';
 
 class BoardCell extends Component {
-
   state = {
-    values: null
-  }
+    values: null,
+  };
 
   onDropdownChange = (col_name, id, class_name, values) => {
-    this.setState({values: values});
+    this.setState({ values });
     document.activeElement.blur();
     axios.put(`/api/task/${col_name}`, { taskID: id, [col_name]: values });
-  }
+  };
 
   handleDayClick = (day, { selected }) => {
     this.setState({
-      values: selected ? undefined : day.toLocaleDateString()
+      values: selected ? undefined : day.toLocaleDateString(),
     });
     document.activeElement.blur();
-    axios.put(`/api/task/end_date`, { taskID: this.props.item.id, end_date: day.toLocaleDateString() })
-  }
+    axios.put('/api/task/end_date', { taskID: this.props.item.id, end_date: day.toLocaleDateString() });
+  };
 
   returnClassName(values, col_name) {
     switch (col_name) {
@@ -47,21 +46,25 @@ class BoardCell extends Component {
             return '';
         }
       case 'time_est':
-        return 'time-est-input'
+        return 'time-est-input';
       default:
         return '';
     }
   }
 
   render() {
-    const { props: { item, col_name, ti, uc, s }, state: { values } } = this;
+    const {
+      props: {
+        item, col_name, ti, uc, s,
+      }, state: { values },
+    } = this;
     return (
       <td
         className={`board-cell ${this.returnClassName(values || item[col_name], col_name)} ${col_name === 'name' ? 'left-align' : ''}`}
         tabIndex={ti}
         onClick={() => uc(col_name, item.name)}
       >
-        {col_name === 'time_est' ? '' : values ? values : item[col_name]}
+        {col_name === 'time_est' ? '' : values || item[col_name]}
         <DashColumnPicker
           id={`col-${item.id}-${col_name}`}
           modalType={col_name}
@@ -73,9 +76,8 @@ class BoardCell extends Component {
           item={this.props.item}
         />
       </td>
-    )
+    );
   }
-
 }
 
 export default BoardCell;

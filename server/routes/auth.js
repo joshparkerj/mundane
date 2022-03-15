@@ -1,15 +1,16 @@
 const express = require('express');
-const router = express.Router()
 
-const comparePassword = require('./helpers/compare')
-const hashPassword = require('./helpers/hash')
+const router = express.Router();
+
+const comparePassword = require('./helpers/compare');
+const hashPassword = require('./helpers/hash');
 const serverError = require('./helpers/server-error');
 const isAuthenticated = require('./helpers/authorize');
 
 router.use((req, res, next) => {
-  req.db = req.app.get('db')
+  req.db = req.app.get('db');
   next();
-})
+});
 
 // POST /api/auth/register
 // requires username, password, and email
@@ -29,33 +30,32 @@ router.post('/register', (req, res, next) => {
   req.db.user.get_user_by_name([req.body.username])
     .then(([user]) => {
       if (user) {
-        res.status(409).send('User already exists')
+        res.status(409).send('User already exists');
       } else {
         hashPassword(req.body.password)
-          .then(hash => {
-            return req.db.user.post_user([
-              req.body.username,
-              req.body.email,
-              hash,
-              0
-            ]);
-          })
-          .then(() => {
-            return req.db.user.get_user_on_login([req.body.username])
-          })
-          .then(user => {
-            req.login(user, err => {
-              if (err) return next(err);
-              req.db.team.get_boards_by_user_teams([user[0].id])
-                .then(boards => {
-                  res.json({
-                    user: user[0],
-                    boards: boards
-                  })
-                })
-                .catch(serverError(res))
-            });
+          .then((hash) => req.db.user.post_user([
+            req.body.username,
+            req.body.email,
+            hash,
+            0,
+          ]))
+          .then(() => req.db.user.get_user_on_login([req.body.username]))
+          .then((newUser) => {
+            req.login(newUser, (err) => {
+              if (err) {
+                next(err);
+                return;
+              }
 
+              req.db.team.get_boards_by_user_teams([newUser[0].id])
+                .then((boards) => {
+                  res.json({
+                    user: newUser[0],
+                    boards,
+                  });
+                })
+                .catch(serverError(res));
+            });
           })
           .catch(next);
       }
@@ -69,47 +69,52 @@ router.post('/login', (req, res, next) => {
   req.db.user.get_user_password([req.body.username])
     .then(([pw]) => {
       if (!pw) {
-        res.status(401).send("User doesn't exist")
+        res.status(401).send("User doesn't exist");
       } else {
         comparePassword(req.body.password, pw.password)
-          .then(correct => {
+          .then((correct) => {
             if (!correct) {
               const responseText = 'Password Incorrect';
               console.log(responseText);
               res.status(401).send(responseText);
-            } else {
-              return req.db.user.get_user_on_login([req.body.username]);
+              return null;
             }
+
+            return req.db.user.get_user_on_login([req.body.username]);
           })
-          .then(user => {
+          .then((user) => {
             if (!user) return;
-            req.login(user, err => {
-              if (err) return next(err);
+            req.login(user, (err) => {
+              if (err) {
+                next(err);
+                return;
+              }
+
               req.db.team.get_boards_by_user_teams([user[0].id])
-                .then(boards => {
-                  loginResponse.user = user[0];
+                .then((boards) => {
+                  [loginResponse.user] = user;
                   loginResponse.boards = boards;
-                  return req.db.team.get_teams_by_user([user[0].id])
+                  return req.db.team.get_teams_by_user([user[0].id]);
                 })
-                .then(teams => {
+                .then((teams) => {
                   loginResponse.teams = teams;
-                  res.json(loginResponse)
+                  res.json(loginResponse);
                 })
-                .catch(serverError(res))
+                .catch(serverError(res));
             });
           })
-          .catch(error => console.log(error))
+          .catch((error) => console.log(error));
       }
     })
-    .catch(next)
-})
+    .catch(next);
+});
 
 // GET /api/auth/logout
 // doesn't actually get anything....
-router.get('/logout', (req, res, next) => {
+router.get('/logout', (req, res) => {
   req.logout();
   res.status(200).send('logged out');
-})
+});
 
 // GET /api/auth/session
 // get your session details
@@ -117,58 +122,58 @@ router.get('/session', (req, res) => {
   const sessionResponse = {};
   if (req.user) {
     req.db.user.get_user_on_login([req.user[0].name])
-      .then(user => {
-        sessionResponse.user = user[0];
-        return req.db.team.get_boards_by_user_teams([user[0].id])
+      .then((user) => {
+        [sessionResponse.user] = user;
+        return req.db.team.get_boards_by_user_teams([user[0].id]);
       })
-      .then(boards => {
+      .then((boards) => {
         sessionResponse.boards = boards;
-        res.json(sessionResponse)
+        res.json(sessionResponse);
       })
-      .catch(serverError(res))
+      .catch(serverError(res));
   } else {
-    console.log('no session found')
-    res.status(401).send('session not found')
+    console.log('no session found');
+    res.status(401).send('session not found');
   }
-})
+});
 
 // delete my account...
-router.delete('/me', isAuthenticated, (req, res, next) => {
+router.delete('/me', isAuthenticated, (req, res) => {
   req.db.user.delete_user([req.user[0].id])
     .then(() => {
       req.logout();
       res.status(200).send('deleted');
     })
     .catch(serverError(res));
-})
+});
 
 // PUT /api/auth/password
 // change your password
-router.put('/password', isAuthenticated, (req, res, next) => {
+router.put('/password', isAuthenticated, (req, res) => {
   req.db.user.pw_by_id([req.user[0].id])
     .then(([pw]) => {
       if (!pw) {
-        res.status(401).send("User doesn't exist")
+        res.status(401).send("User doesn't exist");
       } else {
         comparePassword(req.body.currentPassword, pw.password)
-          .then(correct => {
+          .then((correct) => {
             if (!correct) {
               const responseText = 'Password Incorrect';
               console.log(responseText);
               res.status(401).send(responseText);
-            } else {
-              return hashPassword(req.body.newPass)
+              return null;
             }
+
+            return hashPassword(req.body.newPass);
           })
-          .then(hash => {
-            if (!hash) return;
-            return req.db.user.update_password([hash, req.user[0].id])
+          .then((hash) => {
+            if (hash) req.db.user.update_password([hash, req.user[0].id]);
           })
           .then(() => res.status(200).send('password updated'))
           .catch(serverError(res));
       }
     })
     .catch(serverError(res));
-})
+});
 
 module.exports = router;

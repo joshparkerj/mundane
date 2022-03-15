@@ -1,10 +1,10 @@
 /* See if a user is an approved member of the board */
 const serverError = require('./server-error');
 
-module.exports = (req,res,next) => {
-  let boardID = req.params.boardID || req.body.boardID;
+module.exports = (req, res, next) => {
+  const boardID = req.params.boardID || req.body.boardID;
   req.db.approval.on_board([req.user[0].id, boardID])
-    .then(r => {
+    .then((r) => {
       if (r[0] && r[0].approved) {
         next();
       } else {
@@ -12,4 +12,4 @@ module.exports = (req,res,next) => {
       }
     })
     .catch(serverError(res));
-}
+};

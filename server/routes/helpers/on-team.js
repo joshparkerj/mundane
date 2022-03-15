@@ -1,10 +1,10 @@
 /* See if a user is an approved member of the team */
 const serverError = require('./server-error');
 
-module.exports = (req,res,next) => {
+module.exports = (req, res, next) => {
   const teamID = req.params.teamID || req.body.teamID;
   req.db.approval.on_team([req.user[0].id, teamID])
-    .then(r => {
+    .then((r) => {
       if (r[0] && r[0].approved) {
         next();
       } else {
@@ -12,4 +12,4 @@ module.exports = (req,res,next) => {
       }
     })
     .catch(serverError(res));
-}
+};

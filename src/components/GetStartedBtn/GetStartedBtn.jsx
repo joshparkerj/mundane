@@ -6,7 +6,7 @@ function GetStartedBtn({ changeNav }) {
     <div>
       <button onClick={changeNav} className="get-started">Get Started</button>
     </div>
-  )
+  );
 }
 
 export default GetStartedBtn;

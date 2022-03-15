@@ -1,10 +1,10 @@
 /* See if two users are team mates */
 const serverError = require('./server-error');
 
-module.exports = (req,res,next) => {
+module.exports = (req, res, next) => {
   const userID = req.params.userID || req.body.userID;
-  req.db.approval.team_mates([req.user[0].id, req.body.userID])
-    .then(r => {
+  req.db.approval.team_mates([req.user[0].id, userID])
+    .then((r) => {
       if (r[0].team_mates) {
         next();
       } else {
@@ -12,4 +12,4 @@ module.exports = (req,res,next) => {
       }
     })
     .catch(serverError(res));
-}
+};

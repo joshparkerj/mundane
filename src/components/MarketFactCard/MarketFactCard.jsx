@@ -2,23 +2,38 @@ import React from 'react';
 import './market-fact-card.scss';
 import Slide from 'react-reveal/Slide';
 
-export default function MarketFactCard({ text, percent, logo, quote, name, color }) {
+export default function MarketFactCard({
+  text, percent, logo, quote, name, color,
+}) {
   return (
     <div className="fact-card-container">
       <Slide left>
         <div className={`fact-details-wrapper ${color}`}>
-          <span id="percentage"> {percent}% </span> <span id="fact-text"> {text} </span>
+          <span id="percentage">
+            {' '}
+            {percent}
+            %
+            {' '}
+          </span>
+          {' '}
+          <span id="fact-text">
+            {' '}
+            {text}
+            {' '}
+          </span>
         </div>
       </Slide>
-      <Slide right >
-        <div className="fact-quote-wrapper" >
+      <Slide right>
+        <div className="fact-quote-wrapper">
           <div id="logo">
             {logo}
           </div>
           <div className="quote-wrapper">
             <p id="quote">
-              "{quote}"
-                    </p>
+              "
+              {quote}
+              "
+            </p>
             <div id="quote-name">
               {name}
             </div>
@@ -26,5 +41,5 @@ export default function MarketFactCard({ text, percent, logo, quote, name, color
         </div>
       </Slide>
     </div>
-  )
+  );
 }

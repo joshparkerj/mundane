@@ -5,21 +5,24 @@ import 'react-day-picker/lib/style.css';
 import axios from 'axios';
 
 class DashColumnPicker extends Component {
-
   handleDayClick = (day, { selected }) => {
     this.setState({
       selectedDay: selected ? undefined : day,
     });
-  }
+  };
 
-  onEnterTime = ({ key, target, target: {value}}, ) => {
-    if(key === 'Enter') {
-      axios.put('/api/task/time_est', {taskID: this.props.cellID, time_est: value })
+  onEnterTime = ({ key, target, target: { value } }) => {
+    if (key === 'Enter') {
+      axios.put('/api/task/time_est', { taskID: this.props.cellID, time_est: value });
     }
-  }
+  };
 
-  modalTypes = mt => {
-    const { props: { modalType, dropdownChange, cellID, handleDayClick } } = this;
+  modalTypes = (mt) => {
+    const {
+      props: {
+        modalType, dropdownChange, cellID, handleDayClick,
+      },
+    } = this;
     switch (mt) {
       case 'priority':
         return (
@@ -28,9 +31,9 @@ class DashColumnPicker extends Component {
             onClick={this.stopPropagation}
           >
             <div
-              name='High'
+              name="High"
               className="column-modal-button high-priority"
-              onClick={e => dropdownChange(modalType, cellID, 'high-priority', 'High', e)}
+              onClick={(e) => dropdownChange(modalType, cellID, 'high-priority', 'High', e)}
             >
               High
             </div>
@@ -47,7 +50,7 @@ class DashColumnPicker extends Component {
               Low
             </div>
           </div>
-        )
+        );
       case 'status':
         return (
           <div
@@ -73,7 +76,7 @@ class DashColumnPicker extends Component {
               On Hold
             </div>
           </div>
-        )
+        );
       case 'start_date':
       case 'end_date':
         return (
@@ -85,12 +88,12 @@ class DashColumnPicker extends Component {
               onDayClick={(a, b) => handleDayClick(a, b, modalType, cellID)}
             />
           </div>
-        )
+        );
       case 'time_est':
         return (
           <div className="time-est-wrapper">
             <input
-              className={`time-est-input`}
+              className="time-est-input"
               onKeyDown={this.onEnterTime}
               type="number"
               min="0"
@@ -98,14 +101,14 @@ class DashColumnPicker extends Component {
             />
             <div>h</div>
           </div>
-        )
+        );
       case 'owner':
       case 'person':
         return '';
       default:
         return '';
     }
-  }
+  };
 
   render() {
     const { modalType, selected } = this.props;
@@ -114,7 +117,7 @@ class DashColumnPicker extends Component {
         {modalType === 'status' || modalType === 'priority' || modalType === 'end_date' ? (
           <div
             id={this.props.id}
-            className={`column-modal-container ${selected ? "" : "hidden"}`}
+            className={`column-modal-container ${selected ? '' : 'hidden'}`}
           >
             {this.modalTypes(modalType)}
           </div>
@@ -122,13 +125,13 @@ class DashColumnPicker extends Component {
         {modalType === 'time_est' ? (
           <div
             id={this.props.id}
-            className={`${selected ? "" : "hidden"}`}
+            className={`${selected ? '' : 'hidden'}`}
           >
             {this.modalTypes(modalType)}
           </div>
         ) : null}
       </div>
-    )
+    );
   }
 }
 

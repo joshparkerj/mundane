@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import './mark-top-nav.scss';
-import MarketModal from '../MarketModal/MarketModal';
 import $ from 'jquery';
-import { connect } from 'react-redux'
-import { login, register } from '../../redux/actions';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import HamburgerMenu from 'react-hamburger-menu';
+import { login, register } from '../../redux/actions';
+import MarketModal from '../MarketModal/MarketModal';
 
 class MarketTopNav extends Component {
-
   state = {
     displayModal: false,
     username: '',
@@ -17,46 +16,46 @@ class MarketTopNav extends Component {
     registerPassword: '',
     registerUsername: '',
     open: false,
-  }
+  };
 
   handleModalClick = () => {
-    this.setState({displayModal: !this.state.displayModal});
-  }
+    this.setState({ displayModal: !this.state.displayModal });
+  };
 
   handleChange = ({ target: { value, name } }) => {
-    this.setState({[name]: value});
-  }
+    this.setState({ [name]: value });
+  };
 
   handleClickLogin = () => {
     const user = {
       username: this.state.username,
-      password: this.state.password
-    }
-    this.props.login(user)
-  }
+      password: this.state.password,
+    };
+    this.props.login(user);
+  };
 
   handleClickRegister = () => {
     const user = {
       username: this.state.registerUsername,
       password: this.state.registerPassword,
-      email: this.state.registerEmail
-    }
-    this.props.register(user)
-  }
+      email: this.state.registerEmail,
+    };
+    this.props.register(user);
+  };
 
   handleClick = () => {
-    this.setState({open: !this.state.open});
-  }
+    this.setState({ open: !this.state.open });
+  };
 
-  componentDidMount = () => {
-    $(function () {
-      var nav = $(".nav-container");
-      $(window).scroll(function () {
-        var scroll = $(window).scrollTop();
+  componentDidMount() {
+    $(() => {
+      const nav = $('.nav-container');
+      $(window).scroll(() => {
+        const scroll = $(window).scrollTop();
         if (scroll >= 10) {
-          nav.removeClass('nav-container').addClass("fixed-nav");
+          nav.removeClass('nav-container').addClass('fixed-nav');
         } else {
-          nav.removeClass("fixed-nav").addClass('nav-container');
+          nav.removeClass('fixed-nav').addClass('nav-container');
         }
       });
     });
@@ -127,9 +126,8 @@ class MarketTopNav extends Component {
           display={this.props.display}
         />
       </div>
-    )
+    );
   }
-
 }
 
 export default connect(null, { login, register })(MarketTopNav);

@@ -1,26 +1,28 @@
 import React from 'react';
 
-function ModalContainer({ modalOpacity, position, changeState, handleLogin, handleMouseDown, handleRegister, changeToggle }) {
+function ModalContainer({
+  modalOpacity, position, changeState, handleLogin, handleMouseDown, handleRegister, changeToggle,
+}) {
   return (
     <div
       className="modal-container"
       style={{
         opacity: modalOpacity,
-        display: modalOpacity === 0 ? 'none' : undefined
+        display: modalOpacity === 0 ? 'none' : undefined,
       }}
     >
       <div className="inner-modal-container">
         <div
           className="motion-container"
           style={{
-            transform: position !== 1 && position !== 0 ? `translateX(${(50 - position * 100) / 2}%)` : undefined
+            transform: position !== 1 && position !== 0 ? `translateX(${(50 - position * 100) / 2}%)` : undefined,
           }}
         >
           <div
             className="sign-in-container"
             style={{
               opacity: 1 - position,
-              display: position === 1 ? 'none' : undefined
+              display: position === 1 ? 'none' : undefined,
             }}
           >
             <div className="register-inputs-container">
@@ -46,7 +48,8 @@ function ModalContainer({ modalOpacity, position, changeState, handleLogin, hand
                   <span>Not a member?</span>
                   <span
                     className="register-button"
-                    onClick={handleMouseDown} >
+                    onClick={handleMouseDown}
+                  >
                     Register now.
                   </span>
                 </div>
@@ -57,7 +60,7 @@ function ModalContainer({ modalOpacity, position, changeState, handleLogin, hand
             className="register-container"
             style={{
               opacity: position,
-              display: position === 0 ? 'none' : undefined
+              display: position === 0 ? 'none' : undefined,
             }}
           >
             <div className="register-inputs-container">
@@ -85,14 +88,15 @@ function ModalContainer({ modalOpacity, position, changeState, handleLogin, hand
                   onClick={handleRegister}
                 >
                   Submit
-              </button>
+                </button>
                 <div>
                   <span>Already a member?</span>
                   <span
                     className="sign-in-button"
-                    onClick={handleMouseDown} >
+                    onClick={handleMouseDown}
+                  >
                     Sign in.
-                </span>
+                  </span>
                 </div>
               </div>
             </div>
@@ -101,10 +105,13 @@ function ModalContainer({ modalOpacity, position, changeState, handleLogin, hand
       </div>
       <div
         className="exit-modal"
-        onClick={changeToggle}> close
+        onClick={changeToggle}
+      >
+        {' '}
+        close
+      </div>
     </div>
-    </div>
-  )
+  );
 }
 
 export default ModalContainer;

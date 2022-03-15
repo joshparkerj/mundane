@@ -1,7 +1,7 @@
-module.exports = (req,res,next) => {
+module.exports = (req, res, next) => {
   if (req.isAuthenticated()) {
-    next()
+    next();
   } else {
-    res.status(401).send('You must be logged in.')
+    res.status(401).send('You must be logged in.');
   }
-}
+};

@@ -1,10 +1,10 @@
 /* See if a user is an approved member of the task */
 const serverError = require('./server-error');
 
-module.exports = (req,res,next) => {
+module.exports = (req, res, next) => {
   const taskID = req.params.taskID || req.body.taskID;
   req.db.approval.on_task([req.user[0].id, taskID])
-    .then(r => {
+    .then((r) => {
       if (r[0] && r[0].approved) {
         next();
       } else {
@@ -12,4 +12,4 @@ module.exports = (req,res,next) => {
       }
     })
     .catch(serverError(res));
-}
+};

@@ -1,59 +1,45 @@
 import React, { Component } from 'react';
-import './inboxPosts.scss';
+import './directMessages.scss';
 import axios from 'axios';
 
-class InboxPosts extends Component {
-
-  state = {
-    clickedLike: false,
-  }
-
+class DirectMessages extends Component {
   markAsRead = () => {
     axios.post('/api/comment/read', { commentID: this.props.commentID })
-      .then(() => this.props.readFunction(this.props.commentID))
-  }
+      .then(() => this.props.readFunction(this.props.commentID));
+  };
 
   markAsUnread = () => {
     axios.post('/api/comment/unread', { commentID: this.props.commentID })
-      .then(() => this.props.readFunction(this.props.commentID))
-  }
+      .then(() => this.props.readFunction(this.props.commentID));
+  };
 
   toggleReadClick = () => {
-    if (this.props.commentRead) { this.markAsUnread() }
-    else { this.markAsRead() }
-  }
+    if (this.props.commentRead) { this.markAsUnread(); } else { this.markAsRead(); }
+  };
 
   handleClickLikes = () => {
-    if (this.state.clickedLike === false) {
-      axios.post('/api/comment/like')
-      this.setState({ clickedLike: true })
-    }
-  }
+    axios.post('/api/comment/like');
+  };
 
   render() {
-    const { author, authorPic, boardName, content, taskName } = this.props
+    const { author, authorPic, content } = this.props;
     return (
       <div className="post-container">
         <div>
           <div className="post-header">
             <div className="post-title">
-              <a href="profile_info" >
-                <img className="profile-pic" src={authorPic} alt="None"></img>
+              <a href="profile_info">
+                <img className="profile-pic" src={authorPic} alt="None" />
               </a>
               <div className="title">
-                <a className="user-name" href="Profile-Name">{author}</a>
-                <div className="post-board-link">
-                  <a href="actual-post-board-link" className="router-link">
-                    <i className="material-icons">sort</i>
-                    {boardName}
-                  </a>
-                  <span id="divider"> > </span>
-                  <a href="task-name" className="router-link">{taskName}</a>
-                </div>
+                <a className="user-name" href="Profile-Name">
+                  Direct message from
+                  {' '}
+                  {author}
+                </a>
               </div>
             </div>
-            <div className="post-top-right-wrapper">
-            </div>
+            <div className="post-top-right-wrapper" />
           </div>
           <div className="post-body-wrapper">
             <div className="post-body">
@@ -73,8 +59,7 @@ class InboxPosts extends Component {
                   <i className="material-icons">bookmark_border</i>
                 </span>
                 <span className="tool-span">
-                  <i className="material-icons"
-                  >thumb_up</i>
+                  <i className="material-icons" onClick={this.handleClickLikes}>thumb_up</i>
                   <span className="tool-counter">{this.props.readCount}</span>
                 </span>
                 <span className="tool-end">
@@ -94,9 +79,8 @@ class InboxPosts extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
-
 }
 
-export default InboxPosts;
+export default DirectMessages;
