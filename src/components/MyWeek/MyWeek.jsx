@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import SectionTypeContainer from './SectionTypeContainer';
 import PersonalAssistantContentHeader from './PersonalAssistantContentHeader';
 import stcs from './stcs.json';
 import './MyWeek.scss';
 
-class MyWeek extends Component {
-  state = {
-    prevWeek: [1],
-    nextWeek: [1, 2],
-    date: 'Feb 2 - Feb 8',
-    username: 'Mr.user',
-    upcomingAssignments: "You don't have any assignments this week",
-    personFilter: '',
+const MyWeek = function MyWeek() {
+  const [personFilter, setPersonFilter] = useState('');
+  const [stcState, setStcState] = useState({
     prevWeekHide: false,
     earlierHide: false,
     todayHide: false,
@@ -22,78 +17,75 @@ class MyWeek extends Component {
     today: [{ task: 'one', number: 1 }, { task: 'two', number: 2 }, { task: 'three', number: 3 }],
     upcoming: [{ task: 'one', number: 1 }, { task: 'two', number: 2 }, { task: 'three', number: 3 }],
     done: [{ task: 'one', number: 1 }],
-    assignmentCount: [1, 2],
-  };
+  });
 
-  getCount = (name) => this.state[name].length;
+  // TODO: See if we'll need a way to modify the following values:
+  const prevWeek = [1];
+  const nextWeek = [1, 2];
+  const date = 'Feb 2 - Feb 8';
+  const username = 'Mr.user';
+  const upcomingAssignments = 'You Don\'t have any assignments this week';
+  const assignmentCount = [1, 2];
 
-  getValue = (name) => this.state[name];
-
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  };
-
-  toggleState = (name) => {
-    this.setState({ [name]: !this.state[name] });
-  };
-
-  stcMapper = (e, i) => (
+  const stcMapper = ({ hc, bt, nav }, i) => (
     <SectionTypeContainer
-      hc={() => this.toggleState(e.hc)}
-      bt={e.bt}
-      ac={this.getCount('assignmentCount')}
-      sdd={this.state[e.hc]}
-      nav={this.state[e.nav]}
+      hc={() => {
+        const newStcState = { ...stcState };
+        newStcState[hc] = !newStcState[hc];
+        setStcState(newStcState);
+      }}
+      bt={bt}
+      ac={assignmentCount.length}
+      sdd={stcState[hc]}
+      nav={stcState[nav]}
       key={i}
     />
   );
 
-  render() {
-    return (
-      <div className="my-week-main-container">
-        <PersonalAssistantContentHeader
-          pwc={this.getCount('prevWeek')}
-          nwc={this.getCount('nextWeek')}
-          dv={this.getValue('date')}
-        />
-        <div className="personal-assistant-content-view">
-          <div className="personal-assistant-content-component">
-            <div className="header-container">
-              <div className="personal-assistant-header-component">
-                <img src="https://cdn.monday.com/assets/deadline/coffee_team.png" className="image-title" alt="" />
-                <div className="pesonal-assistant-titles">
-                  <div className="first-title">
-                    <span className="greeting">{this.getValue('username')}</span>
-                  </div>
-                  <div className="second-title">
-                    <span className="upcoming-assignments">{this.getValue('upcomingAssignments')}</span>
-                  </div>
+  return (
+    <div className="my-week-main-container">
+      <PersonalAssistantContentHeader
+        pwc={prevWeek.length}
+        nwc={nextWeek.length}
+        dv={date}
+      />
+      <div className="personal-assistant-content-view">
+        <div className="personal-assistant-content-component">
+          <div className="header-container">
+            <div className="personal-assistant-header-component">
+              <img src="https://cdn.monday.com/assets/deadline/coffee_team.png" className="image-title" alt="" />
+              <div className="pesonal-assistant-titles">
+                <div className="first-title">
+                  <span className="greeting">{username}</span>
+                </div>
+                <div className="second-title">
+                  <span className="upcoming-assignments">{upcomingAssignments}</span>
                 </div>
               </div>
-              <div className="personal-assistant-filter-wrapper">
-                <div className="personal-assistant-filter-component">
-                  <div className="person-filter-input-wrapper">
-                    <div className="pure-input">
-                      <input value={this.state.personFilter} name="personFilter" onChange={this.handleChange} className="input person-filter-input" placeholder="Filter by person" />
-                      <div className="tooltip">
-                        <i className="material-icons" id="person">person_outline</i>
-                        <span className="tooltiptext">Search by person</span>
-                      </div>
+            </div>
+            <div className="personal-assistant-filter-wrapper">
+              <div className="personal-assistant-filter-component">
+                <div className="person-filter-input-wrapper">
+                  <div className="pure-input">
+                    <input value={personFilter} name="personFilter" onChange={({ target }) => setPersonFilter(target.value)} className="input person-filter-input" placeholder="Filter by person" />
+                    <div className="tooltip">
+                      <i className="material-icons" id="person">person_outline</i>
+                      <span className="tooltiptext">Search by person</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="deadlines-task-container">
-              <div className="deadline-tasks-section-component">
-                {stcs.map(this.stcMapper)}
-              </div>
+          </div>
+          <div className="deadlines-task-container">
+            <div className="deadline-tasks-section-component">
+              {stcs.map(stcMapper)}
             </div>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default MyWeek;
