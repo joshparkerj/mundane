@@ -1,60 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './new-register-view.scss';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-class NewRegisterView extends Component {
-  state = {
-    searchText: '',
-    teamsList: [],
-  };
+const NewRegisterView = function NewRegisterView() {
+  const [searchText, setSearchText] = useState('');
+  const [teamsList, setTeamsList] = useState([]);
 
-  handleChange = (value) => {
-    this.setState({ searchText: value });
-  };
-
-  searchOnEnter = ({ key, target }) => {
+  const searchOnEnter = ({ key }) => {
     if (key === 'Enter') {
-      target.value = '';
-      axios.get(`/api/team/by-name/${this.state.searchText}`)
+      setSearchText('');
+      axios.get(`/api/team/by-name/${searchText}`)
         .then((response) => {
-          this.setState({ teamsList: response.data });
+          setTeamsList(response.data);
         });
     }
   };
 
-  handleJoin = (teamName) => {
+  const handleJoin = (teamName) => {
     axios.post('/api/team/join-name', { name: teamName });
   };
 
-  render() {
-    const teamsList = this.state.teamsList.map((team, i) => (
-      <div className="team-name-container" key={i}>
-        <div>{team.name}</div>
-        <i
-          className="material-icons"
-          onClick={() => this.handleJoin(team.name)}
-        >
-          add_circle_outline
-        </i>
+  return (
+    <div className="new-register-container">
+      <h1>Join a Team.</h1>
+      <input
+        value={searchText}
+        placeholder="Search here..."
+        onChange={(e) => setSearchText(e.target.value)}
+        onKeyDown={searchOnEnter}
+      />
+      <div className="list-container">
+        {teamsList.map((team) => (
+          <div className="team-name-container" key={team.id}>
+            <div>{team.name}</div>
+            <i
+              tabIndex="-1"
+              role="button"
+              className="material-icons"
+              onClick={() => handleJoin(team.name)}
+              onKeyPress={() => handleJoin(team.name)}
+            >
+              add_circle_outline
+            </i>
+          </div>
+        ))}
       </div>
-    ));
-
-    return (
-      <div className="new-register-container">
-        <h1>Join a Team.</h1>
-        <input
-          placeholder="Search here..."
-          onChange={(e) => this.handleChange(e.target.value)}
-          onKeyDown={this.searchOnEnter}
-        />
-        <div className="list-container">
-          {teamsList}
-        </div>
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   user: state.user,
