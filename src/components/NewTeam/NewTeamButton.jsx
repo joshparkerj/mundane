@@ -1,41 +1,37 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './NewTeamButton.scss';
 import axios from 'axios';
 
-class NewTeamButton extends Component {
-  state = {
-    teamName: '',
-  };
+const NewTeamButton = function NewTeamButton() {
+  const [teamName, setTeamName] = useState('');
 
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
-
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/team', { name: this.state.teamName })
+    axios.post('/api/team', { name: teamName })
       .then(() => {
-        this.setState({ teamName: '' });
+        setTeamName('');
       });
-    this.setState({ teamName: 'Thank you!' });
+
+    setTeamName('Thank you!');
   };
 
-  render() {
-    return (
-      <form
-        className="new-team-button"
-        onSubmit={this.handleSubmit}
-      >
-        <label>Create a new team.</label>
+  return (
+    <form
+      className="new-team-button"
+      onSubmit={handleSubmit}
+    >
+      <label htmlFor="team-name">
+        Create a new team.
         <input
-          name="teamName"
-          value={this.state.teamName}
-          onChange={this.handleChange}
+          name="team-name"
+          id="team-name"
+          value={teamName}
+          onChange={({ target }) => setTeamName(target.value)}
           placeholder="Enter team name here"
         />
-      </form>
-    );
-  }
-}
+      </label>
+    </form>
+  );
+};
 
 export default NewTeamButton;
