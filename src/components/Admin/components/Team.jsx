@@ -1,16 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './StatBox.scss';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
+
 import TeamMember from './TeamMember';
 
-class Team extends Component {
-  rosterMapper = (e, i) => (
-    <TeamMember teamMember={e} key={i} />
-  );
+const Team = function Team({ dashboard }) {
+  const { roster } = dashboard;
 
-  teamMapper = (teamName, i) => {
-    const { props: { dashboard: { roster } }, rosterMapper } = this;
+  const rosterMapper = function rosterMapper(e, i) {
+    return <TeamMember teamMember={e} key={i} />;
+  };
+
+  const teamMapper = function teamMapper(teamName, i) {
     return (
       <div className="team" key={i}>
         <h1>
@@ -34,18 +37,24 @@ class Team extends Component {
     );
   };
 
-  render() {
-    const { props: { dashboard: { roster } }, teamMapper } = this;
-    return (
-      <div>
-        {roster ? _.uniq(roster.map((e) => e.team_name)).map(teamMapper) : ''}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      {roster ? _.uniq(roster.map((e) => e.team_name)).map(teamMapper) : ''}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   dashboard: state.user.dashboard,
 });
+
+Team.propTypes = {
+  dashboard: PropTypes.shape({
+    roster: PropTypes.arrayOf(PropTypes.shape({
+      team_name: PropTypes.string,
+      manager: PropTypes.bool,
+    })),
+  }).isRequired,
+};
 
 export default connect(mapStateToProps)(Team);
