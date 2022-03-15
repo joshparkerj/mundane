@@ -6,12 +6,19 @@ const logger = require('morgan');
 const massive = require('massive');
 const bodyParser = require('body-parser');
 const path = require('path');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(logger('tiny'));
+app.use(rateLimit({
+  windowMs: 500,
+  max: 5,
+  legacyHeaders: false,
+  standardHeaders: true,
+}));
 
 massive (process.env.dataBase)
   .then( db => {
