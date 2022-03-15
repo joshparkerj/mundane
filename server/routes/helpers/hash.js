@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 
 const saltRounds = 10;
 
 module.exports = (password) => new Promise((resolve, reject) => {
-  bcrypt.hash(password, null, null, (err, result) => {
+  bcrypt.hash(password, saltRounds, (err, result) => {
     if (err) {
       reject(err);
     } else {

@@ -6,7 +6,7 @@
   "proxy": "http://localhost:8080",
   "dependencies": {
     "axios": "^0.26.1",
-    "bcrypt-nodejs": "0.0.3",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.18.3",
     "connect-pg-simple": "^7.0.0",
     "connected-react-router": "^6.2.2",
