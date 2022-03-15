@@ -10,7 +10,7 @@ const pgStore = new pgSession({
 module.exports = (app, db) => {
   app.use(session({
     store: pgStore,
-    secret: 'jasdkfjalksdjflkasdf',
+    secret: process.env.sessionSecret,
     resave: false,
     saveUninitialized: false,
     cookie: {
