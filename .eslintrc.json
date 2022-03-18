@@ -6,6 +6,7 @@
     },
     "extends": [
         "plugin:react/recommended",
+        "plugin:jest/recommended",
         "airbnb"
     ],
     "parserOptions": {
@@ -15,8 +16,9 @@
         "ecmaVersion": "latest"
     },
     "plugins": [
-        "react"
+        "react", "jest"
     ],
     "rules": {
-    }
+    },
+    "ignorePatterns": ["serviceWorker.js"]
 }

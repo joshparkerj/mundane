@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 
 module.exports = (password, hash) => new Promise((resolve, reject) => {
   bcrypt.compare(password, hash, (err, result) => {

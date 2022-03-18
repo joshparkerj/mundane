@@ -14,8 +14,8 @@ const Marketing = function Marketing() {
     <div>
       <MarketTopNav display={displayModal} toggle={handleClick} />
       <Switch>
-        <Route path="/why-us" render={(props) => <WhyUs {...props} toggle={handleClick} />} />
-        <Route path="/" render={(props) => <MarketingLanding {...props} toggle={handleClick} />} />
+        <Route path="/why-us" render={() => <WhyUs toggle={handleClick} />} />
+        <Route path="/" render={() => <MarketingLanding toggle={handleClick} />} />
       </Switch>
       <MarketFooter />
     </div>

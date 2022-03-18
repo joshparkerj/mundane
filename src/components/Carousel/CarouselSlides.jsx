@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function CarouselSlides({ title, image, color }) {
   return (
@@ -11,5 +12,11 @@ function CarouselSlides({ title, image, color }) {
     </div>
   );
 }
+
+CarouselSlides.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};
 
 export default CarouselSlides;
