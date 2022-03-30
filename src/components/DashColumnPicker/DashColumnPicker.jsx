@@ -1,7 +1,7 @@
 import React from 'react';
 import './dash-column-picker.scss';
 import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
+import 'react-day-picker/dist/style.css';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
