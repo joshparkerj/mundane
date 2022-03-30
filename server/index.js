@@ -11,15 +11,16 @@ const routes = require('./routes');
 
 const app = express();
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(logger('tiny'));
 app.use(rateLimit({
   windowMs: 500,
   max: 5,
   legacyHeaders: false,
   standardHeaders: true,
 }));
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(logger('tiny'));
 
 massive(process.env.dataBase)
   .then((db) => {
