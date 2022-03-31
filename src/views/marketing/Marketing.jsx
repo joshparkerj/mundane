@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Routes as Switch, Route } from 'react-router-dom';
 import WhyUs from './MarketWhyUs/MarketWhyUs';
 import MarketingLanding from './MarketingLanding/MarketingLanding';
 import MarketTopNav from '../../components/MarketTopNav/MarketTopNav';
@@ -14,8 +14,8 @@ const Marketing = function Marketing() {
     <div>
       <MarketTopNav display={displayModal} toggle={handleClick} />
       <Switch>
-        <Route path="/why-us" render={() => <WhyUs toggle={handleClick} />} />
-        <Route path="/" render={() => <MarketingLanding toggle={handleClick} />} />
+        <Route path="/why-us" element={<WhyUs toggle={handleClick} />} />
+        <Route path="*" element={<MarketingLanding toggle={handleClick} />} />
       </Switch>
       <MarketFooter />
     </div>

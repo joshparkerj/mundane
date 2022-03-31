@@ -50,13 +50,13 @@ const DashboardLanding = function DashboardLanding({
         atActive={{ opacity: 1 }}
         className="dashboard-inner-wrapper"
       >
-        <Route path="/dashboard/Inbox" render={() => <Inbox />} />
-        <Route path="/dashboard/myweek" render={() => <MyWeek />} />
-        <Route path="/dashboard/boards" render={() => <BoardsView />} />
-        <Route path="/dashboard/Admin" render={({ history: hist }) => <Admin history={hist} />} />
-        <Route path="/dashboard/profile" render={() => <MyProfile user={user.user} />} />
-        <Route path="/dashboard/join-team" component={NewRegisterView} />
-        <Route path="/dashboard/" render={() => <BoardsView />} />
+        <Route path="/dashboard/Inbox" element={<Inbox />} />
+        <Route path="/dashboard/myweek" element={<MyWeek />} />
+        <Route path="/dashboard/boards" element={<BoardsView />} />
+        <Route path="/dashboard/Admin" element={<Admin history={history} />} />
+        <Route path="/dashboard/profile" element={<MyProfile user={user.user} />} />
+        <Route path="/dashboard/join-team" element={<NewRegisterView />} />
+        <Route path="/dashboard/" element={<BoardsView />} />
       </AnimatedSwitch>
     </div>
   );

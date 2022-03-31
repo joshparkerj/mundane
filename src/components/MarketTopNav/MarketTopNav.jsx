@@ -140,7 +140,7 @@ const MarketTopNav = function MarketTopNav({
 
 MarketTopNav.propTypes = {
   toggle: PropTypes.func.isRequired,
-  display: PropTypes.number.isRequired,
+  display: PropTypes.bool.isRequired,
   register: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
 };

@@ -40,7 +40,7 @@ const MarketModal = function MarketModal({
 };
 
 MarketModal.propTypes = {
-  display: PropTypes.number.isRequired,
+  display: PropTypes.bool.isRequired,
   changeState: PropTypes.func.isRequired,
   changeToggle: PropTypes.func.isRequired,
   handleLogin: PropTypes.func.isRequired,

@@ -156,7 +156,7 @@ const WhyUs = function WhyUs({ toggle }) {
 };
 
 WhyUs.propTypes = {
-  toggle: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 export default WhyUs;

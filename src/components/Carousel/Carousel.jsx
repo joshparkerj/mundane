@@ -6,20 +6,20 @@ import PropTypes from 'prop-types';
 import CarouselSlides from './CarouselSlides';
 import slides from './slides';
 
-function CustomArrow({ className, onClick, dir }) {
+function CustomArrow({ dir }) {
   return (
-    <div tabIndex="-1" role="button" {...{ className, onClick }} onKeyPress={onClick}>
+    <div tabIndex="-1" role="button">
       <i className={`fas fa-long-arrow-alt-${dir}`} style={{ color: '#000' }} />
     </div>
   );
 }
 
-function CustomPrevArrow({ className, onClick }) {
-  return <CustomArrow {...{ className, onClick }} dir="left" />;
+function CustomPrevArrow() {
+  return <CustomArrow dir="left" />;
 }
 
-function CustomNextArrow({ className, onClick }) {
-  return <CustomArrow {...{ className, onClick }} dir="right" />;
+function CustomNextArrow() {
+  return <CustomArrow dir="right" />;
 }
 
 const Carousel = function Carousel({ handleChange }) {
@@ -55,19 +55,7 @@ const Carousel = function Carousel({ handleChange }) {
 };
 
 CustomArrow.propTypes = {
-  className: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
   dir: PropTypes.string.isRequired,
-};
-
-CustomPrevArrow.propTypes = {
-  className: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
-
-CustomNextArrow.propTypes = {
-  className: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
 };
 
 Carousel.propTypes = {

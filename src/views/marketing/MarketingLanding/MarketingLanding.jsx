@@ -27,7 +27,7 @@ const MarketingLanding = function MarketingLanding({ toggle }) {
 };
 
 MarketingLanding.propTypes = {
-  toggle: PropTypes.bool.isRequired,
+  toggle: PropTypes.func.isRequired,
 };
 
 export default MarketingLanding;

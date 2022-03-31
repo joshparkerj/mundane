@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { ConnectedRouter } from 'connected-react-router';
-import { Switch, Route } from 'react-router-dom';
+import { Routes as Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify';
@@ -21,15 +21,15 @@ const App = function App({ userExists, getSession: getSesh }) {
       <ToastContainer />
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path="/marketing" component={Marketing} />
+          <Route path="/marketing" element={<Marketing />} />
           {
             userExists && (
               <Switch>
-                <Route path="/dashboard" component={DashboardLanding} />
+                <Route path="/dashboard" element={<DashboardLanding />} />
               </Switch>
             )
           }
-          <Route component={Marketing} />
+          <Route path="*" element={<Marketing />} />
         </Switch>
       </ConnectedRouter>
     </div>
