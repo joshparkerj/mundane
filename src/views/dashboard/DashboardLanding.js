@@ -46,7 +46,12 @@ class DashboardLanding extends Component {
     return (
       <div className='dashboard-wrapper'>
         <div className='topNavBar'>
+<<<<<<< HEAD
           <TopNavBar page={this.props.history.push}  />
+=======
+
+          <TopNavBar page={this.props.history.push} />
+>>>>>>> 3193cf394817e48f3e966f5763eaf757be6b6819
         </div>
         <DashSideNav
           changeViews={this.changeViews}
@@ -103,6 +108,15 @@ class DashboardLanding extends Component {
             />
           </Switch>
         </div>
+<<<<<<< HEAD
+=======
+        <CommentSlideIn />
+
+
+
+
+
+>>>>>>> 3193cf394817e48f3e966f5763eaf757be6b6819
       </div>
     )
   }
