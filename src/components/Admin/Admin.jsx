@@ -45,9 +45,9 @@ const Admin = function Admin({ history }) {
         atActive={{ opacity: 1 }}
         className="switch-wrapper"
       >
-        <Route path="/dashboard/Admin/My-Team" element={<Team />} />
-        <Route path="/dashboard/Admin/Stats" element={<Stats />} />
-        <Route path="/dashboard/Admin/" element={<General />} />
+        <Route path="/dashboard/Admin/My-Team" render={() => <Team />} />
+        <Route path="/dashboard/Admin/Stats" render={() => <Stats />} />
+        <Route path="/dashboard/Admin/" render={() => <General />} />
       </AnimatedSwitch>
     </div>
   );

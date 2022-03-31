@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, Routes as Switch, Route } from 'react-router-dom';
+import { NavLink, Switch, Route } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -108,9 +108,8 @@ const MyProfile = function MyProfile({ setPic: setPicFunc, user }) {
           </section>
           <section className="user_profile_bottom_container">
             <Switch>
-              { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
-              <Route path="/dashboard/profile/personal-info" element={<Personal user={user} />} />
-              <Route path="/dashboard/profile/password" element={<Password />} />
+              <Route path="/dashboard/profile/personal-info" render={() => <Personal user={user} />} />
+              <Route path="/dashboard/profile/password" render={() => <Password />} />
             </Switch>
           </section>
         </div>
