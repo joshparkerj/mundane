@@ -117,8 +117,6 @@
 
   &:hover {
     cursor: pointer;
-
-    .title-side {}
   }
 
   a {
@@ -138,6 +136,29 @@
 .link-wrapper:hover {
   background-color: #e1e1e1;
 
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 5%;
+  padding-left: 8%;
+  flex-direction: column;
+  min-height: 40px;
+  border-bottom: solid 1px #999999;
+
+  &:hover {
+    color: #009aff;
+    cursor: pointer;
+
+    .title {
+      color: #009aff !important;
+    }
+  }
+
+  a {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    text-decoration: none;
+  }
 }
 
 @media only screen and (max-width: 1280px) {
