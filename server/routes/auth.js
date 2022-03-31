@@ -1,4 +1,5 @@
 const express = require('express');
+const debug = require('debug');
 
 const router = express.Router();
 
@@ -74,9 +75,7 @@ router.post('/login', (req, res, next) => {
         comparePassword(req.body.password, pw.password)
           .then((correct) => {
             if (!correct) {
-              const responseText = 'Password Incorrect';
-              console.log(responseText);
-              res.status(401).send(responseText);
+              res.status(401).send('Password Incorrect');
               return null;
             }
 
@@ -103,7 +102,7 @@ router.post('/login', (req, res, next) => {
                 .catch(serverError(res));
             });
           })
-          .catch((error) => console.log(error));
+          .catch((error) => debug('server-routes-auth')(error));
       }
     })
     .catch(next);
@@ -132,7 +131,6 @@ router.get('/session', (req, res) => {
       })
       .catch(serverError(res));
   } else {
-    console.log('no session found');
     res.status(401).send('session not found');
   }
 });
@@ -158,9 +156,7 @@ router.put('/password', isAuthenticated, (req, res) => {
         comparePassword(req.body.currentPassword, pw.password)
           .then((correct) => {
             if (!correct) {
-              const responseText = 'Password Incorrect';
-              console.log(responseText);
-              res.status(401).send(responseText);
+              res.status(401).send('Password Incorrect');
               return null;
             }
 

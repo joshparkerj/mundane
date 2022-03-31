@@ -74,30 +74,30 @@ router.get('/team/:teamID', isAuthenticated, onTeam, (req, res) => {
 
 router.get('/');
 
-router.get('/all', isAuthenticated, (req,res,next) => {
+router.get('/all', isAuthenticated, (req, res) => {
   res.locals.dash = {};
   req.db.dashboard.get_all_rosters([req.user[0].id])
-    .then(roster => {
+    .then((roster) => {
       res.locals.dash.roster = roster;
       return req.db.dashboard.get_all_boards([req.user[0].id]);
     })
-    .then(boards => {
+    .then((boards) => {
       res.locals.dash.boards = boards;
       return req.db.dashboard.get_all_tasks([req.user[0].id]);
     })
-    .then(tasks => {
+    .then((tasks) => {
       res.locals.dash.tasks = tasks;
       return req.db.dashboard.get_all_assignments([req.user[0].id]);
     })
-    .then(assignments => {
+    .then((assignments) => {
       res.locals.dash.assignments = assignments;
       return req.db.dashboard.get_all_comments([req.user[0].id]);
     })
-    .then(comments => {
+    .then((comments) => {
       res.locals.dash.comments = comments;
       res.status(200).json(res.locals.dash);
     })
-    .catch(err => serverError(err,res));
-})
+    .catch((err) => serverError(err, res));
+});
 
 module.exports = router;

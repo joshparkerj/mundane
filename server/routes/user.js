@@ -121,10 +121,10 @@ router.put('/email', isAuthenticated, (req, res) => {
 
 // PUT api/user/email
 // set your email
-router.put('/email', isAuthenticated, (req,res,next) => {
+router.put('/email', isAuthenticated, (req, res) => {
   req.db.user.set_email([req.body.email, req.user[0].id])
     .then(() => res.status(200).send('email set'))
-    .catch(err => serverError(err,res));
-})
+    .catch((err) => serverError(err, res));
+});
 
 module.exports = router;
