@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+
 import CommentSlideIn from '../CommentSlideIn/CommentSlideIn';
 import BoardRow from './BoardRow';
+
 import './boards.scss';
 
 const Boards = function Boards({ board_id: boardID, board_name: boardName }) {
@@ -11,23 +14,19 @@ const Boards = function Boards({ board_id: boardID, board_name: boardName }) {
   const [commentList, setCommentList] = useState([]);
   const [open, setOpen] = useState(false);
   const [taskName, setTaskName] = useState('');
-  const [selectedDay, setSelectedDay] = useState(null);
+  const selectedDay = null;
   const [commentText, setCommentText] = useState('');
   const [addRowName, setAddRowName] = useState('');
 
   useEffect(() => {
-    // add axios request to create row
     axios.get(`/api/task/by-board/${boardID}`)
       .then(({ data }) => setItems(data));
-
-    // WTF
     document.addEventListener('click', (e) => e.target.focus());
   }, []);
 
   const checkSelected = (row, col) => row === selectedRow && col === selectedCol;
 
   const taskNameChange = () => {
-    console.log(selectedRow, taskName);
     axios.put('/api/task/name', { taskID: selectedRow, name: taskName });
     setItems(items.map((item) => (item.id === selectedRow ? { ...item, name: taskName } : item)));
   };
@@ -125,6 +124,11 @@ const Boards = function Boards({ board_id: boardID, board_name: boardName }) {
       />
     </div>
   );
+};
+
+Boards.propTypes = {
+  board_id: PropTypes.number.isRequired,
+  board_name: PropTypes.string.isRequired,
 };
 
 export default Boards;

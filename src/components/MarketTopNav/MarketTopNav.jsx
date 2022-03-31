@@ -1,53 +1,61 @@
-import React, { Component } from 'react';
-import './mark-top-nav.scss';
+import React, { useEffect, useState } from 'react';
 import $ from 'jquery';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import HamburgerMenu from 'react-hamburger-menu';
+import PropTypes from 'prop-types';
+
 import { login, register } from '../../redux/actions';
 import MarketModal from '../MarketModal/MarketModal';
 
-class MarketTopNav extends Component {
-  state = {
-    displayModal: false,
-    username: '',
-    password: '',
-    registerEmail: '',
-    registerPassword: '',
-    registerUsername: '',
-    open: false,
-  };
+import './mark-top-nav.scss';
 
-  handleModalClick = () => {
-    this.setState({ displayModal: !this.state.displayModal });
-  };
+const MarketTopNav = function MarketTopNav({
+  toggle, display, register: handleRegister, login: handleLogin,
+}) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+  const [registerUsername, setRegisterUsername] = useState('');
+  const [open, setOpen] = useState(false);
 
-  handleChange = ({ target: { value, name } }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleClickLogin = () => {
-    const user = {
-      username: this.state.username,
-      password: this.state.password,
+  const handleChange = ({ target: { value, name } }) => {
+    const changeMap = {
+      username: setUsername,
+      password: setPassword,
+      registerEmail: setRegisterEmail,
+      registerPassword: setRegisterPassword,
+      registerUsername: setRegisterUsername,
     };
-    this.props.login(user);
+
+    changeMap[name](value);
   };
 
-  handleClickRegister = () => {
+  const handleClickLogin = () => {
     const user = {
-      username: this.state.registerUsername,
-      password: this.state.registerPassword,
-      email: this.state.registerEmail,
+      username,
+      password,
     };
-    this.props.register(user);
+
+    handleLogin(user);
   };
 
-  handleClick = () => {
-    this.setState({ open: !this.state.open });
+  const handleClickRegister = () => {
+    const user = {
+      username: registerUsername,
+      password: registerPassword,
+      email: registerEmail,
+    };
+
+    handleRegister(user);
   };
 
-  componentDidMount() {
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  useEffect(() => {
     $(() => {
       const nav = $('.nav-container');
       $(window).scroll(() => {
@@ -59,75 +67,82 @@ class MarketTopNav extends Component {
         }
       });
     });
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="nav-container">
-        <Link className="nav-logo" to="/" />
-        <div className="nav-right">
-          <div
-            id="nav-product"
-            className="menu"
-          >
-            Product
-          </div>
-          <Link
-            to="why-us"
-            id="nav-why"
-            className="menu"
-          >
-            Why Us
-          </Link>
-          <button
-            onClick={this.props.toggle}
-            className="menu"
-          >
-            Log in
-          </button>
-          <div className="mobile-menu">
-            <HamburgerMenu
-              isOpen={this.state.open}
-              menuClicked={this.handleClick}
-            />
-          </div>
-          {this.state.open ? (
-            <div className="mobile-dropdown">
-              <div className="inner-dropdown">
-                <div
-                  id="nav-product"
-                  className="mobile-items"
-                >
-                  Product
-                </div>
-                <Link
-                  to="why-us"
-                  id="nav-why"
-                  className="mobile-items"
-                >
-                  Why Us
-                </Link>
-                <button
-                  onClick={this.props.toggle}
-                  className="mobile-items"
-                  id="nav-login"
-                >
-                  Log in
-                </button>
-              </div>
-            </div>
-          ) : null}
+  return (
+    <div className="nav-container">
+      <Link className="nav-logo" to="/" />
+      <div className="nav-right">
+        <div
+          id="nav-product"
+          className="menu"
+        >
+          Product
         </div>
-        <MarketModal
-          changeToggle={this.props.toggle}
-          changeState={this.handleChange}
-          handleLogin={this.handleClickLogin}
-          handleRegister={this.handleClickRegister}
-          display={this.props.display}
-        />
+        <Link
+          to="why-us"
+          id="nav-why"
+          className="menu"
+        >
+          Why Us
+        </Link>
+        <button
+          type="button"
+          onClick={toggle}
+          className="menu"
+        >
+          Log in
+        </button>
+        <div className="mobile-menu">
+          <HamburgerMenu
+            isOpen={open}
+            menuClicked={handleClick}
+          />
+        </div>
+        {open ? (
+          <div className="mobile-dropdown">
+            <div className="inner-dropdown">
+              <div
+                id="nav-product"
+                className="mobile-items"
+              >
+                Product
+              </div>
+              <Link
+                to="why-us"
+                id="nav-why"
+                className="mobile-items"
+              >
+                Why Us
+              </Link>
+              <button
+                type="button"
+                onClick={toggle}
+                className="mobile-items"
+                id="nav-login"
+              >
+                Log in
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
-    );
-  }
-}
+      <MarketModal
+        changeToggle={toggle}
+        changeState={handleChange}
+        handleLogin={handleClickLogin}
+        handleRegister={handleClickRegister}
+        display={display}
+      />
+    </div>
+  );
+};
+
+MarketTopNav.propTypes = {
+  toggle: PropTypes.func.isRequired,
+  display: PropTypes.number.isRequired,
+  register: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+};
 
 export default connect(null, { login, register })(MarketTopNav);

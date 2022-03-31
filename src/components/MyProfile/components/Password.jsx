@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import './Password.scss';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+
+import './Password.scss';
 
 const Password = function Password() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -16,13 +18,14 @@ const Password = function Password() {
     };
     if (newPass === comparePass) {
       axios.put('/api/auth/password', passwords)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           setCurrentPassword('');
           setNewPassword('');
           setConfirmNewPassword('');
         });
-    } else alert("Passwords don't match");
+    } else {
+      toast.error("Passwords don't match");
+    }
   };
 
   return (

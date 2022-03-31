@@ -38,22 +38,24 @@ const BoardCell = function BoardCell({
   };
 
   return (
-    <td
-      className={`board-cell ${returnClassName(values || item[colNameProp], colNameProp)} ${colNameProp === 'name' ? 'left-align' : ''}`}
-      tabIndex={ti}
-      onClick={() => uc(colNameProp, item.name)}
-    >
-      {colNameProp === 'time_est' ? '' : values || item[colNameProp]}
-      <DashColumnPicker
-        id={`col-${item.id}-${colNameProp}`}
-        modalType={colNameProp}
-        selected={s}
-        dropdownChange={onDropdownChange}
-        cellID={item.id}
-        handleDayClick={handleDayClick}
-        selectedDay={selectedDay}
-        item={item}
-      />
+    <td className={`board-cell ${returnClassName(values || item[colNameProp], colNameProp)} ${colNameProp === 'name' ? 'left-align' : ''}`}>
+      <button
+        tabIndex={ti}
+        type="button"
+        onClick={() => uc(colNameProp, item.name)}
+      >
+        {colNameProp === 'time_est' ? '' : values || item[colNameProp]}
+        <DashColumnPicker
+          id={`col-${item.id}-${colNameProp}`}
+          modalType={colNameProp}
+          selected={s}
+          dropdownChange={onDropdownChange}
+          cellID={item.id}
+          handleDayClick={handleDayClick}
+          selectedDay={selectedDay}
+          item={item}
+        />
+      </button>
     </td>
   );
 };

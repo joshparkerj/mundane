@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function ModalContainer({
+const ModalContainer = function ModalContainer({
   modalOpacity, position, changeState, handleLogin, handleMouseDown, handleRegister, changeToggle,
 }) {
   return (
@@ -41,17 +42,18 @@ function ModalContainer({
                 />
               </div>
               <div>
-                <button onClick={handleLogin}>
+                <button type="submit" onClick={handleLogin}>
                   Submit
                 </button>
                 <div>
                   <span>Not a member?</span>
-                  <span
+                  <button
+                    type="button"
                     className="register-button"
                     onClick={handleMouseDown}
                   >
                     Register now.
-                  </span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -85,33 +87,46 @@ function ModalContainer({
               </div>
               <div>
                 <button
+                  type="submit"
                   onClick={handleRegister}
                 >
                   Submit
                 </button>
                 <div>
                   <span>Already a member?</span>
-                  <span
+                  <button
+                    type="button"
                     className="sign-in-button"
                     onClick={handleMouseDown}
                   >
                     Sign in.
-                  </span>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div
+      <button
+        type="button"
         className="exit-modal"
         onClick={changeToggle}
       >
         {' '}
         close
-      </div>
+      </button>
     </div>
   );
-}
+};
+
+ModalContainer.propTypes = {
+  modalOpacity: PropTypes.number.isRequired,
+  position: PropTypes.number.isRequired,
+  changeState: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  handleMouseDown: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired,
+  changeToggle: PropTypes.func.isRequired,
+};
 
 export default ModalContainer;

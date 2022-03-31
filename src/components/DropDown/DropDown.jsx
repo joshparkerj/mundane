@@ -1,27 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import './DropMenu.scss';
 
-class DropDown extends Component {
-  handleClick = () => {
-    this.setState({ hidden: !this.state.hidden });
-  };
+const DropDown = function DropDown({ nav }) {
+  const subMenu = nav.map((e) => (
+    <li className="drop-down-nav" key={e.name}>
+      <span className="board-name">
+        {e.name}
+      </span>
+    </li>
+  ));
 
-  render() {
-    const subMenu = this.props.nav.map((e, i) => (
-      <li className="drop-down-nav" key={i}>
-        <span className="board-name">
-          {e.name}
-        </span>
-      </li>
-    ));
-    return (
-      <div className="drop-nav-wrapper">
-        <ul className="submenu">
-          {subMenu}
-        </ul>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="drop-nav-wrapper">
+      <ul className="submenu">
+        {subMenu}
+      </ul>
+    </div>
+  );
+};
+
+DropDown.propTypes = {
+  nav: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string,
+  })).isRequired,
+};
 
 export default DropDown;

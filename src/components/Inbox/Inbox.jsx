@@ -1,53 +1,44 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './inbox.scss';
 import axios from 'axios';
 import DefaultInbox from './DefaultInbox';
 import InboxPosts from '../InboxPosts/InboxPosts';
 import DirectMessages from './DirectMessages';
 
-class Inbox extends Component {
-  state = {
-    directMessages: [],
-    comments: [],
-    allUpdates: false,
-    count: null,
-  };
+const Inbox = function Inbox() {
+  const [directMessages, setDirectMessages] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [allUpdates, setAllUpdates] = useState(false);
+  const [shouldShowDirectMessages, setShouldShowDirectMessages] = useState(false);
 
-  componentDidMount() {
-    this.getDirectMessages();
-    this.getComments();
-  }
-
-  getDirectMessages = () => {
+  const getDirectMessages = () => {
     axios.get('/api/message')
-      .then((response) => {
-        this.setState({ directMessages: response.data });
+      .then(({ data }) => {
+        setDirectMessages(data);
       });
   };
 
-  getComments = () => {
+  const getComments = () => {
     axios.get('/api/comment')
-      .then((comments) => {
-        this.setState({ comments: comments.data });
+      .then(({ data }) => {
+        setComments(data);
       });
   };
 
-  countComments = () => this.state.comments.filter((comment) => !comment.read).length;
+  useEffect(() => {
+    getDirectMessages();
+    getComments();
+  }, []);
 
-  markCommentRead = (commentID) => {
-    const { comments } = this.state;
-    const comment = comments.find((comment) => comment.id === commentID);
+  const countComments = () => comments.filter((comment) => !comment.read).length;
+
+  const markCommentRead = (commentID) => {
+    const comment = comments.find((c) => c.id === commentID);
     comment.read = !comment.read;
-    this.setState({ comments: [...comments] });
+    setComments([...comments]);
   };
 
-  showAllUpdates = () => this.state.comments.map(this.renderInboxPosts);
-
-  showOpenUpdates = () => this.state.comments.filter((comment) => !comment.read).map(this.renderInboxPosts);
-
-  showDirectMessages = () => this.state.directMessages.map(this.renderDirectMessages);
-
-  renderInboxPosts = (comment, index) => (
+  const renderInboxPosts = (comment, index) => (
     <InboxPosts
       author={comment.author}
       authorPic={comment.author_pic}
@@ -56,14 +47,14 @@ class Inbox extends Component {
       taskName={comment.task}
       commentID={comment.id}
       key={index}
-      readFunction={this.markCommentRead}
+      readFunction={markCommentRead}
       commentRead={comment.read}
       readCount={comment.read_count}
       likesCount={comment.like_count}
     />
   );
 
-  renderDirectMessages = (message, index) => (
+  const renderDirectMessages = (message, index) => (
     <DirectMessages
       author={message.author}
       authorPic={message.author_pic}
@@ -72,57 +63,72 @@ class Inbox extends Component {
     />
   );
 
-  handleAllUpdates = (event) => {
+  const showAllUpdates = () => comments.map(renderInboxPosts);
+
+  const showOpenUpdates = () => comments.filter((comment) => !comment.read).map(renderInboxPosts);
+
+  const showDirectMessages = () => directMessages.map(renderDirectMessages);
+
+  const handleAllUpdates = (event) => {
     event.preventDefault();
-    this.setState({ allUpdates: true, showDirectMessages: false });
+    setAllUpdates(true);
+    setShouldShowDirectMessages(false);
   };
 
-  handleOpenUpdates = (event) => {
+  const handleOpenUpdates = (event) => {
     event.preventDefault();
-    this.setState({ allUpdates: false, showDirectMessages: false });
+    setAllUpdates(false);
+    setShouldShowDirectMessages(false);
   };
 
-  handleDirectMessages = (event) => {
+  const handleDirectMessages = (event) => {
     event.preventDefault();
-    this.setState({ allUpdates: false, showDirectMessages: true });
+    setAllUpdates(false);
+    setShouldShowDirectMessages(true);
   };
 
-  render() {
-    return (
-      <div className="inbox-wrapper-component">
-        <div className="inbox-title-wrapper">
-          <span className="inbox-title-comp">Inbox</span>
-          <div className="inbox-title-actions">
-            <span className="inbox-toggle-mode">
-              <span className="active" onClick={this.handleOpenUpdates}>
-                {' '}
-                Open (
-                {this.countComments()}
-                )
-                {' '}
-              </span>
-              /
-              <span className="inbox-all-updates" onClick={this.handleAllUpdates}> All Updates </span>
-              /
-              <span className="inbox-direct-messages" onClick={this.handleDirectMessages}> DMs</span>
-            </span>
-          </div>
-        </div>
-        <div className="middle-space-wrapper">
-          <div className="posts-list">
-            {(this.countComments() > 0 && !this.state.allUpdates) || (this.state.comments.length > 0 && this.state.allUpdates)
-              ? ''
-              : (<DefaultInbox />)}
-            {this.state.allUpdates
-              ? this.showAllUpdates()
-              : this.state.showDirectMessages
-                ? this.showDirectMessages()
-                : this.showOpenUpdates()}
-          </div>
+  const showPostsList = () => {
+    if (allUpdates) {
+      return showAllUpdates();
+    }
+
+    if (shouldShowDirectMessages) {
+      return showDirectMessages();
+    }
+
+    return showOpenUpdates();
+  };
+
+  return (
+    <div className="inbox-wrapper-component">
+      <div className="inbox-title-wrapper">
+        <span className="inbox-title-comp">Inbox</span>
+        <div className="inbox-title-actions">
+          <span className="inbox-toggle-mode">
+            <button type="button" className="active" onClick={handleOpenUpdates}>
+              {' '}
+              Open (
+              {countComments()}
+              )
+              {' '}
+            </button>
+            /
+            <button type="button" className="inbox-all-updates" onClick={handleAllUpdates}> All Updates </button>
+            /
+            <button type="button" className="inbox-direct-messages" onClick={handleDirectMessages}> DMs</button>
+          </span>
         </div>
       </div>
-    );
-  }
-}
+      <div className="middle-space-wrapper">
+        <div className="posts-list">
+          {(countComments() > 0 && !allUpdates) || (comments.length > 0 && allUpdates)
+            ? ''
+            : (<DefaultInbox />)}
+          {showPostsList()}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default Inbox;

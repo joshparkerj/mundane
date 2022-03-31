@@ -1,7 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './allUpdates.scss';
 
-function AllUpdates({
+const AllUpdates = function AllUpdates({
   author, authorPic, boardName, content, taskName, toggleFunction,
 }) {
   return (
@@ -57,14 +59,23 @@ function AllUpdates({
         <div className="button-read-wrapper">
           button read wrapper
           <div className="button-read">
-            <span>
-              <i className="material-icons" onClick={toggleFunction}>check_box</i>
-            </span>
+            <button type="button" onClick={toggleFunction}>
+              <i className="material-icons">check_box</i>
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+AllUpdates.propTypes = {
+  author: PropTypes.string.isRequired,
+  authorPic: PropTypes.string.isRequired,
+  boardName: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  taskName: PropTypes.string.isRequired,
+  toggleFunction: PropTypes.func.isRequired,
+};
 
 export default AllUpdates;

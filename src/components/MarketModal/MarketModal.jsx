@@ -1,50 +1,50 @@
-import React, { Component } from 'react';
-import './market-modal.scss';
+import React, { useState } from 'react';
 import { Motion, spring, presets } from 'react-motion';
+import PropTypes from 'prop-types';
+
+import './market-modal.scss';
+
 import ModalContainer from './ModalContainer';
 
-class MarketModal extends Component {
-  state = {
-    register: false,
-    closeModal: false,
+const MarketModal = function MarketModal({
+  display, changeState, changeToggle, handleLogin, handleRegister,
+}) {
+  const [register, setRegister] = useState(false);
+
+  const handleMouseDown = () => {
+    setRegister(!register);
   };
 
-  handleMouseDown = () => {
-    this.setState({ register: !this.state.register });
-  };
+  const renderModalContainer = ({ position, modalOpacity }) => (
+    <ModalContainer
+      position={position}
+      modalOpacity={modalOpacity}
+      changeState={changeState}
+      changeToggle={changeToggle}
+      handleLogin={handleLogin}
+      handleRegister={handleRegister}
+      handleMouseDown={handleMouseDown}
+    />
+  );
 
-  renderModalContainer = ({ position, modalOpacity }) => {
-    const {
-      props: {
-        changeState, changeToggle, handleLogin, handleRegister,
-      }, handleMouseDown,
-    } = this;
-    return (
-      <ModalContainer
-        position={position}
-        modalOpacity={modalOpacity}
-        changeState={changeState}
-        changeToggle={changeToggle}
-        handleLogin={handleLogin}
-        handleRegister={handleRegister}
-        handleMouseDown={handleMouseDown}
-      />
-    );
-  };
+  return (
+    <Motion
+      style={{
+        position: spring(register ? 1 : 0, presets.gentle),
+        modalOpacity: spring(display ? 1 : 0, presets.noWobble),
+      }}
+    >
+      {renderModalContainer}
+    </Motion>
+  );
+};
 
-  render() {
-    const { props: { display }, state: { register } } = this;
-    return (
-      <Motion
-        style={{
-          position: spring(register ? 1 : 0, presets.gentle),
-          modalOpacity: spring(display ? 1 : 0, presets.noWobble),
-        }}
-      >
-        {this.renderModalContainer}
-      </Motion>
-    );
-  }
-}
+MarketModal.propTypes = {
+  display: PropTypes.number.isRequired,
+  changeState: PropTypes.func.isRequired,
+  changeToggle: PropTypes.func.isRequired,
+  handleLogin: PropTypes.func.isRequired,
+  handleRegister: PropTypes.func.isRequired,
+};
 
 export default MarketModal;

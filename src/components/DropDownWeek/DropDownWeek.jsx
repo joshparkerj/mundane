@@ -1,9 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './DropDownWeek.scss';
 
-function DropDownWeek({ nav }) {
-  const subMenu = nav.map((e, i) => (
-    <li key={i}><span>{e.task}</span></li>
+const DropDownWeek = function DropDownWeek({ nav }) {
+  const subMenu = nav.map((e) => (
+    <li key={e.task}><span>{e.task}</span></li>
   ));
   return (
     <div className="drop-nav-wrapper">
@@ -12,6 +14,12 @@ function DropDownWeek({ nav }) {
       </ul>
     </div>
   );
-}
+};
+
+DropDownWeek.propTypes = {
+  nav: PropTypes.arrayOf(PropTypes.shape({
+    task: PropTypes.string,
+  })).isRequired,
+};
 
 export default DropDownWeek;

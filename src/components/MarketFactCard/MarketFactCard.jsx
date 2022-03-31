@@ -1,8 +1,11 @@
 import React from 'react';
-import './market-fact-card.scss';
+import PropTypes from 'prop-types';
+
 import Slide from 'react-reveal/Slide';
 
-export default function MarketFactCard({
+import './market-fact-card.scss';
+
+const MarketFactCard = function MarketFactCard({
   text, percent, logo, quote, name, color,
 }) {
   return (
@@ -42,4 +45,15 @@ export default function MarketFactCard({
       </Slide>
     </div>
   );
-}
+};
+
+MarketFactCard.propTypes = {
+  text: PropTypes.string.isRequired,
+  percent: PropTypes.string.isRequired,
+  logo: PropTypes.string.isRequired,
+  quote: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  color: PropTypes.string.isRequired,
+};
+
+export default MarketFactCard;

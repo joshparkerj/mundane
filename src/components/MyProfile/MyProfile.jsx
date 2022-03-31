@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './MyProfile.scss';
 import { NavLink, Switch, Route } from 'react-router-dom';
 import Popup from 'reactjs-popup';
 import { connect } from 'react-redux';
@@ -8,6 +7,8 @@ import PropTypes from 'prop-types';
 import Personal from './components/Personal';
 import Password from './components/Password';
 import { setPic } from '../../redux/actions';
+
+import './MyProfile.scss';
 
 const contentStyle = {
   maxWidth: '600px',
@@ -48,20 +49,20 @@ const MyProfile = function MyProfile({ setPic: setPicFunc, user }) {
                 >
                   {(close) => (
                     <div className="picture_edit_form">
-                      <div className="close" onClick={close}>&times;</div>
+                      <button type="button" className="close" onClick={close}>&times;</button>
                       <div className="header"> Change picture</div>
                       <br />
                       <div className="ui input">
                         <input type="text" id="title_input" name="url" placeholder="enter a url" value={url} onChange={({ target }) => setUrl(target.value)} />
                       </div>
-                      <button className="save_url_btn" onClick={() => handleClickUrl(close)}>Save</button>
+                      <button type="submit" className="save_url_btn" onClick={() => handleClickUrl(close)}>Save</button>
                       <br />
-                      <div className="header2" onClick={() => handleClickRemovePic(close)}>
+                      <button type="button" className="header2" onClick={() => {}}>
                         {' '}
                         Remove picture
                         <br />
                         <i className="fas fa-trash-alt" />
-                      </div>
+                      </button>
                     </div>
                   )}
                 </Popup>
@@ -83,7 +84,7 @@ const MyProfile = function MyProfile({ setPic: setPicFunc, user }) {
             >
               {(close) => (
                 <div className="edit_form">
-                  <div className="close" onClick={close}>&times;</div>
+                  <button type="button" className="close" onClick={close}>&times;</button>
                   <div className="header"> Change username</div>
                   <br />
                   <div className="ui input">
@@ -91,7 +92,7 @@ const MyProfile = function MyProfile({ setPic: setPicFunc, user }) {
                   </div>
                   <br />
                   <div className="save-title-btn">
-                    <button className="save" onClick={() => handleClickChangeUsername(close)}>Save</button>
+                    <button type="submit" className="save" onClick={() => {}}>Save</button>
                   </div>
                 </div>
               )}
@@ -107,6 +108,7 @@ const MyProfile = function MyProfile({ setPic: setPicFunc, user }) {
           </section>
           <section className="user_profile_bottom_container">
             <Switch>
+              { /* eslint-disable-next-line react/jsx-props-no-spreading */ }
               <Route path="/dashboard/profile/personal-info" render={(props) => <Personal {...props} user={user} />} />
               <Route path="/dashboard/profile/password" component={Password} />
             </Switch>
