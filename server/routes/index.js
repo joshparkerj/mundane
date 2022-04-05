@@ -1,5 +1,4 @@
 const express = require('express');
-const rateLimit = require('express-rate-limit');
 
 const router = express.Router();
 
@@ -12,9 +11,6 @@ const messageRouter = require('./message');
 const commentRouter = require('./comment');
 const dashboardRouter = require('./dashboard');
 const assignmentRouter = require('./assignment');
-const rate = require('../rate.json');
-
-router.use(rateLimit(rate));
 
 router.use('/auth', authRouter);
 router.use('/board', boardRouter);

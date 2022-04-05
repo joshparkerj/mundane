@@ -1,5 +1,4 @@
 const express = require('express');
-const rateLimit = require('express-rate-limit');
 
 const router = express.Router();
 
@@ -8,16 +7,13 @@ const serverError = require('./helpers/server-error');
 const onMessage = require('./helpers/on-message');
 const messageRecipient = require('./helpers/message-recipient');
 const messageSender = require('./helpers/message-sender');
-const rate = require('../rate.json');
-
-router.use(rateLimit(rate));
 
 const rdbm = (req) => req.db.message;
 const rjsr = (res) => (r) => res.json(r);
 const rsm = (res, message) => () => res.send(message);
 const ruser = (req) => req.user[0].id;
 
-router.use((req, _, next) => {
+router.use((req, res, next) => {
   req.db = req.app.get('db');
   next();
 });

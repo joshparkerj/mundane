@@ -1,5 +1,4 @@
 const express = require('express');
-const rateLimit = require('express-rate-limit');
 
 const router = express.Router();
 const serverError = require('./helpers/server-error');
@@ -8,11 +7,8 @@ const onBoard = require('./helpers/on-board');
 const onTask = require('./helpers/on-task');
 const teamMates = require('./helpers/team-mates');
 const taskLord = require('./helpers/task-lord');
-const rate = require('../rate.json');
 
-router.use(rateLimit(rate));
-
-router.use((req, _, next) => {
+router.use((req, res, next) => {
   req.db = req.app.get('db');
   next();
 });

@@ -1,5 +1,3 @@
-[![Node.js CI](https://github.com/joshparkerj/monday-ne-dot-com/actions/workflows/node.js.yml/badge.svg)](https://github.com/joshparkerj/monday-ne-dot-com/actions/workflows/node.js.yml)[![codecov](https://codecov.io/gh/joshparkerj/monday-ne-dot-com/branch/master/graph/badge.svg?token=77EIG4ZNCM)](https://codecov.io/gh/joshparkerj/monday-ne-dot-com)
-
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

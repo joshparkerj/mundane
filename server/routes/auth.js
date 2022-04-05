@@ -1,5 +1,4 @@
 const express = require('express');
-const rateLimit = require('express-rate-limit');
 const debug = require('debug');
 
 const router = express.Router();
@@ -8,11 +7,8 @@ const comparePassword = require('./helpers/compare');
 const hashPassword = require('./helpers/hash');
 const serverError = require('./helpers/server-error');
 const isAuthenticated = require('./helpers/authorize');
-const rate = require('../rate.json');
 
-router.use(rateLimit(rate));
-
-router.use((req, _, next) => {
+router.use((req, res, next) => {
   req.db = req.app.get('db');
   next();
 });

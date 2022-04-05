@@ -10,11 +10,15 @@ const debug = require('debug');
 
 const configureSession = require('./configure/session');
 const routes = require('./routes');
-const rate = require('./rate.json');
 
 const app = express();
 
-app.use(rateLimit(rate));
+app.use(rateLimit({
+  windowMs: 500,
+  max: 5,
+  legacyHeaders: false,
+  standardHeaders: true,
+}));
 
 app.use(cors());
 app.use(bodyParser.json());
