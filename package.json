@@ -98,7 +98,7 @@
     "start": "node scripts/start.js",
     "server": "node ./server/index.js",
     "build": "node scripts/build.js",
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "npx eslint \"./src/**/*.jsx\" \"./src/**/*.js\" \"./server/**/*.js\""
   },
   "eslintConfig": {
@@ -141,6 +141,9 @@
   "jest": {
     "roots": [
       "<rootDir>/src"
+    ],
+    "coverageReporters": [
+      "cobertura"
     ],
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
