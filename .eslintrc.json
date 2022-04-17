@@ -19,6 +19,7 @@
         "react", "jest"
     ],
     "rules": {
+        "jest/no-disabled-tests": "off"
     },
     "ignorePatterns": ["serviceWorker.js"]
 }

@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { push } from 'connected-react-router';
+
+// https://github.com/supasate/connected-react-router/blob/master/src/actions.js
+const push = (...args) => ({
+  type: '@@router/CALL_HISTORY_METHOD',
+  payload: {
+    method: 'push',
+    args,
+  },
+});
 
 export const login = (user) => (dispatch) => {
   axios.post('/api/auth/login', user)

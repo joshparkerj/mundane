@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { ConnectedRouter } from 'connected-react-router';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify';
@@ -19,7 +18,7 @@ const App = function App({ userExists, getSession: getSesh }) {
   return (
     <div className="App">
       <ToastContainer />
-      <ConnectedRouter history={history}>
+      <Router history={history}>
         <Switch>
           <Route path="/marketing" render={() => <Marketing />} />
           {
@@ -31,7 +30,7 @@ const App = function App({ userExists, getSession: getSesh }) {
           }
           <Route path="*" render={() => <Marketing />} />
         </Switch>
-      </ConnectedRouter>
+      </Router>
     </div>
   );
 };
