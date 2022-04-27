@@ -1,7 +1,7 @@
 const passport = require('passport');
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
-const csrf = require('csurf');
+// const csrf = require('csurf');
 
 // eslint-disable-next-line new-cap
 const pgStore = new pgSession({
@@ -16,14 +16,14 @@ module.exports = (app, db) => {
     saveUninitialized: false,
     cookie: {
       expires: 5 * 24 * 60 * 60 * 1000, // 5 days
-      secure: true,
+      secure: false,
     },
   }));
 
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use(csrf({ cookie: true }));
+  // app.use(csrf({ cookie: true }));
 
   passport.serializeUser((user, done) => {
     done(null, user[0].id);
