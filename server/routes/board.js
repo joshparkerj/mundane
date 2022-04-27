@@ -56,6 +56,7 @@ router.get('/id/:name', isAuthenticated, (req, res, next) => {
         res.status(404).send('no board located');
         return;
       }
+
       sendBoardID(id[0].id, req.params.name, req, res, next);
     })
     .catch(serverError(res));

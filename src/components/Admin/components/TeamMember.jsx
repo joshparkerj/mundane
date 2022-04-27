@@ -31,6 +31,7 @@ const TeamMember = function TeamMember({ teamMember }) {
       </tr>
     );
   }
+
   return (
     <tr>
       <td>{teamMember.name}</td>

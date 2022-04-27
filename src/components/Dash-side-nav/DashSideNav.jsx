@@ -18,6 +18,7 @@ const DashSideNav = function DashSideNav({ changeViews, dashboard, count }) {
       return dashboard.boards
         .filter((e) => (p ? e.private : !e.private)).length;
     }
+
     return 0;
   };
 

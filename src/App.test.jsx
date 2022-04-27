@@ -9,7 +9,7 @@ import './match-media.mock';
 
 import App from './App';
 
-it.skip('renders without crashing', () => {
+it('App renders without crashing', () => {
   render(
     <Provider store={store}>
       <Router>

@@ -75,7 +75,9 @@ const CommentSlideIn = function CommentsSlideIn({
           X
         </button>
         <form
-          onSubmit={(e) => { e.preventDefault(); updateTaskName(); }}
+          onSubmit={(e) => {
+            e.preventDefault(); updateTaskName();
+          }}
         >
           <input
             className="title-input"

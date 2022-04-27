@@ -2,6 +2,7 @@ import React from 'react';
 import './carousel.scss';
 import Slider from 'react-slick';
 import PropTypes from 'prop-types';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import CarouselSlides from './CarouselSlides';
 import slides from './slides';
@@ -23,6 +24,8 @@ function CustomNextArrow() {
 }
 
 const Carousel = function Carousel({ handleChange }) {
+  const errorFallbackComponent = () => <div>error</div>;
+
   return (
     <Slider
       {...{
@@ -42,14 +45,19 @@ const Carousel = function Carousel({ handleChange }) {
       }}
       afterChange={handleChange}
     >
-      {slides.map(({ title, image, color }) => (
-        <CarouselSlides
-          color={color}
-          title={title}
-          image={image}
-          key={title}
-        />
-      ))}
+      <ErrorBoundary
+        FallbackComponent={errorFallbackComponent}
+        onReset={() => /* give up */null}
+      >
+        {slides.map(({ title, image, color }) => (
+          <CarouselSlides
+            color={color}
+            title={title}
+            image={image}
+            key={title}
+          />
+        ))}
+      </ErrorBoundary>
     </Slider>
   );
 };

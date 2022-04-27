@@ -19,7 +19,19 @@
         "react", "jest"
     ],
     "rules": {
-        "jest/no-disabled-tests": "off"
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": "block-like", "next": "*"},
+            { "blankLine": "always", "prev": "multiline-expression", "next": "*"}
+        ],
+        "curly": [
+            "error",
+            "all"
+        ],
+        "brace-style" : [
+            1,
+            "1tbs"
+        ]
     },
     "ignorePatterns": ["serviceWorker.js"]
 }

@@ -21,6 +21,7 @@ const Boards = function Boards({ board_id: boardID, board_name: boardName }) {
   useEffect(() => {
     axios.get(`/api/task/by-board/${boardID}`)
       .then(({ data }) => setItems(data));
+
     document.addEventListener('click', (e) => e.target.focus());
   }, []);
 

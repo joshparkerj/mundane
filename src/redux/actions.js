@@ -16,6 +16,7 @@ export const login = (user) => (dispatch) => {
         type: 'USER',
         payload: serverUser,
       });
+
       if (serverUser) {
         dispatch(push('/dashboard'));
       }
@@ -29,6 +30,7 @@ export const logout = () => (dispatch) => {
         type: 'LOGOUT',
         payload: null,
       });
+
       dispatch(push('/'));
     });
 };
@@ -40,6 +42,7 @@ export const getSession = () => (dispatch) => {
         type: 'USER',
         payload: user,
       });
+
       if (!user) {
         dispatch(push('/marketing'));
       } else {
@@ -56,6 +59,7 @@ export const register = (user) => (dispatch) => {
         type: 'USER',
         payload: serverUser,
       });
+
       dispatch(push('/dashboard/join-team'));
     });
 };

@@ -70,6 +70,7 @@ router.put('/', isAuthenticated, commentLord, (req, res) => {
     .then(() => res.status(200).send('updated comment'))
     .catch(serverError(res));
 });
+
 // DELETE /api/comment/:commentID
 // don't forget the commentID param
 router.delete('/:commentID', isAuthenticated, commentLord, (req, res) => {
@@ -77,6 +78,7 @@ router.delete('/:commentID', isAuthenticated, commentLord, (req, res) => {
     .then(() => res.status(200).send('deleted comment'))
     .catch(serverError(res));
 });
+
 // POST /api/comment/read
 // mark comment as read
 router.post('/read', isAuthenticated, (req, res) => {
@@ -84,6 +86,7 @@ router.post('/read', isAuthenticated, (req, res) => {
     .then(() => res.status(200).send('marked read'))
     .catch(serverError(res));
 });
+
 // POST /api/comment/unread
 // mark comment as unread
 router.post('/unread', isAuthenticated, (req, res) => {
@@ -91,6 +94,7 @@ router.post('/unread', isAuthenticated, (req, res) => {
     .then(() => res.status(200).send('marked unread'))
     .catch(serverError(res));
 });
+
 // POST /api/comment/like
 // like comment
 router.post('/like', isAuthenticated, (req, res) => {
@@ -98,6 +102,7 @@ router.post('/like', isAuthenticated, (req, res) => {
     .then(() => res.status(200).send('liked'))
     .catch(serverError(res));
 });
+
 // POST /api/comment/unlike
 // unlike comment
 router.post('/unlike', isAuthenticated, (req, res) => {

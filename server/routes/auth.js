@@ -24,14 +24,17 @@ router.post('/register', (req, res, next) => {
     res.status(400).send('username required');
     return;
   }
+
   if (!req.body.password || req.body.password.length < 1) {
     res.status(400).send('password required');
     return;
   }
+
   if (!req.body.email || req.body.email.length < 1) {
     res.status(400).send('email required');
     return;
   }
+
   req.db.user.get_user_by_name([req.body.username])
     .then(([user]) => {
       if (user) {
@@ -86,7 +89,10 @@ router.post('/login', (req, res, next) => {
             return req.db.user.get_user_on_login([req.body.username]);
           })
           .then((user) => {
-            if (!user) return;
+            if (!user) {
+              return;
+            }
+
             req.login(user, (err) => {
               if (err) {
                 next(err);
@@ -167,7 +173,9 @@ router.put('/password', isAuthenticated, (req, res) => {
             return hashPassword(req.body.newPass);
           })
           .then((hash) => {
-            if (hash) req.db.user.update_password([hash, req.user[0].id]);
+            if (hash) {
+              req.db.user.update_password([hash, req.user[0].id]);
+            }
           })
           .then(() => res.status(200).send('password updated'))
           .catch(serverError(res));

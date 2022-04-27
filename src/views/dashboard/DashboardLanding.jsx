@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import {
+  shape, arrayOf, func, string, bool,
+} from 'prop-types';
+import { createBrowserHistory } from 'history';
 
 import './DashboardLanding.scss';
 import { Route } from 'react-router-dom';
@@ -16,9 +19,9 @@ import MyProfile from '../../components/MyProfile/MyProfile';
 import NewRegisterView from './NewRegister/NewRegisterView';
 
 const DashboardLanding = function DashboardLanding({
-  dashboard: dash, dashboards, history, user,
+  dashboard: dash, dashboards, user,
 }) {
-  const [count, setCount] = useState('');
+  const [count, setCount] = useState(0);
 
   const getCount = () => {
     const numbers = dashboards.comments.filter((comment) => !comment.read).length;
@@ -26,8 +29,12 @@ const DashboardLanding = function DashboardLanding({
   };
 
   useEffect(() => {
-    dash().then(() => { getCount(); });
+    dash().then(() => {
+      getCount();
+    });
   }, []);
+
+  const history = createBrowserHistory();
 
   const changeViews = (e) => {
     const name = e.target.title;
@@ -63,13 +70,18 @@ const DashboardLanding = function DashboardLanding({
 };
 
 DashboardLanding.propTypes = {
-  dashboard: PropTypes.func.isRequired,
-  dashboards: PropTypes.arrayOf().isRequired,
-  history: PropTypes.shape().isRequired,
-  user: PropTypes.shape({
-    user: PropTypes.shape({
-      name: PropTypes.string,
-      pic: PropTypes.string,
+  dashboard: func.isRequired,
+  dashboards: shape({
+    boards: arrayOf(shape({
+      private: bool,
+      name: string,
+      id: string,
+    })),
+  }).isRequired,
+  user: shape({
+    user: shape({
+      name: string,
+      pic: string,
     }),
   }).isRequired,
 };

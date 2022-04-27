@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ToastContainer } from 'react-toastify';
 
-import history from './history';
 import './App.css';
 import DashboardLanding from './views/dashboard/DashboardLanding';
 import Marketing from './views/marketing/Marketing';
@@ -18,7 +17,7 @@ const App = function App({ userExists, getSession: getSesh }) {
   return (
     <div className="App">
       <ToastContainer />
-      <Router history={history}>
+      <Router>
         <Switch>
           <Route path="/marketing" render={() => <Marketing />} />
           {
