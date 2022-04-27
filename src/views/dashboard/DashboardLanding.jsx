@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   shape, arrayOf, func, string, bool,
 } from 'prop-types';
-import { createBrowserHistory } from 'history';
 
 import './DashboardLanding.scss';
 import { Route } from 'react-router-dom';
@@ -17,6 +16,8 @@ import { dashboard } from '../../redux/actions';
 import BoardsView from './BoardsView/BoardsView';
 import MyProfile from '../../components/MyProfile/MyProfile';
 import NewRegisterView from './NewRegister/NewRegisterView';
+
+import history from '../../history';
 
 const DashboardLanding = function DashboardLanding({
   dashboard: dash, dashboards, user,
@@ -33,8 +34,6 @@ const DashboardLanding = function DashboardLanding({
       getCount();
     });
   }, []);
-
-  const history = createBrowserHistory();
 
   const changeViews = (e) => {
     const name = e.target.title;

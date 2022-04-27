@@ -2,14 +2,16 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import $ from 'jquery';
 import { AnimatedSwitch } from 'react-router-transition';
-import PropTypes from 'prop-types';
 
 import General from './components/General';
 import Team from './components/Team';
 import Stats from './components/Stats';
+
+import history from '../../history';
+
 import './Admin.scss';
 
-const Admin = function Admin({ history }) {
+const Admin = function Admin() {
   const handleClick = (name) => {
     history.push(`/dashboard/admin/${name}`);
     $('.admin-nav').removeClass('active');
@@ -51,12 +53,6 @@ const Admin = function Admin({ history }) {
       </AnimatedSwitch>
     </div>
   );
-};
-
-Admin.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
 };
 
 export default Admin;

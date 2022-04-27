@@ -1,7 +1,10 @@
 import React from 'react';
-import './comment-slide-in.scss';
 import axios from 'axios';
-import PropTypes from 'prop-types';
+import {
+  bool, string, arrayOf, shape, func, number,
+} from 'prop-types';
+
+import './comment-slide-in.scss';
 
 const CommentSlideIn = function CommentsSlideIn({
   open,
@@ -107,16 +110,19 @@ const CommentSlideIn = function CommentsSlideIn({
 };
 
 CommentSlideIn.propTypes = {
-  open: PropTypes.bool.isRequired,
-  taskID: PropTypes.string.isRequired,
-  commentList: PropTypes.arrayOf(PropTypes.string).isRequired,
-  updateComment: PropTypes.func.isRequired,
-  taskName: PropTypes.string.isRequired,
-  setTaskName: PropTypes.func.isRequired,
-  closePanel: PropTypes.func.isRequired,
-  updateTaskName: PropTypes.func.isRequired,
-  commentText: PropTypes.string.isRequired,
-  setCommentText: PropTypes.func.isRequired,
+  open: bool.isRequired,
+  taskID: number.isRequired,
+  commentList: arrayOf(shape({
+    id: string,
+    text: string,
+  })).isRequired,
+  updateComment: func.isRequired,
+  taskName: string.isRequired,
+  setTaskName: func.isRequired,
+  closePanel: func.isRequired,
+  updateTaskName: func.isRequired,
+  commentText: string.isRequired,
+  setCommentText: func.isRequired,
 };
 
 export default CommentSlideIn;
